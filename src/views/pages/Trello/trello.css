@@ -1,0 +1,207 @@
+.dashboard-container {
+  width: 100%;
+  margin: auto;
+  flex: 1;
+  height: 100%;
+}
+.dashboard-content {
+  display: flex;
+  align-items: baseline;
+  flex: 1;
+  height: 100%;
+  flex-direction: row;
+  padding: 15px 0 0 15px;
+}
+.dashboard-content button {
+  width: min-content;
+  margin: 0;
+}
+.board {
+  display: flex;
+  /* flex: 1; */
+  height: 100%;
+}
+.task {
+  z-index: 100;
+}
+.task-list-container {
+  flex: 1;
+  padding: 8px;
+  background: ivory;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.taskItem span {
+  max-width: fit-content;
+}
+.task-list-wrapper {
+  user-select: none;
+}
+
+.card-composer button {
+  margin: 0;
+  margin-left: 5px;
+  width: auto;
+}
+.card-composer input {
+  width: 80%;
+}
+
+.task-list-wrapper {
+  width: 272px;
+  padding: 0 4px;
+  height: 100%;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: top;
+  white-space: nowrap;
+}
+.placeholder {
+  width: 246px;
+  height: 24px;
+  border-radius: 3px;
+  background-color: lightgray;
+}
+.task-list-wrapper:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.task-list {
+  background-color: #ebecf0;
+  border-radius: 3px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  position: relative;
+  white-space: normal;
+  border: 1px solid grey;
+  justify-content: flex-start;
+  background: lightgrey;
+  flex: 1;
+  height: max-content;
+}
+
+.task-listHeader {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.taskItem {
+  user-select: none;
+  display: block;
+  min-width: 246px;
+  width: 100%;
+  list-style-type: none;
+  height: 24px;
+  background-color: ivory;
+}
+
+.taskItem.ui.droppable {
+  transform: rotate(3deg);
+  position: absolute;
+  z-index: 1000;
+  box-shadow: 0px 12px 24px -6px rgba(9, 30, 66, 0.25);
+  cursor: grabbing;
+  max-width: 246px;
+}
+
+.active {
+  background-color: lightgray;
+  border-radius: 3px;
+}
+
+.task-list .not-finished,
+.finished {
+  text-align: left;
+}
+
+.task-list ul {
+  padding: 0;
+  list-style-type: none;
+}
+button {
+  outline: none;
+}
+.add-column-btn {
+  outline: greenyellow;
+  text-align: left;
+}
+.add-list.btn {
+  margin: auto;
+  border-radius: 50%;
+  background-color: darkgrey;
+  color: whitesmoke;
+  width: fit-content;
+  outline: none;
+}
+.add-list.btn:hover {
+  background-color: white;
+  color: black;
+  box-shadow: 0 0px 6px 0px rgba(0, 0, 0, 0.5);
+  transform: rotate(720deg);
+  transition: 0.5s ease-in-out;
+  outline: none;
+}
+.close-form-btn {
+  transform: rotate(45deg);
+  border-radius: 50%;
+  border: 0;
+  outline: none;
+}
+.add-task-list-form {
+  text-align: left;
+  position: relative;
+  padding: 8px;
+}
+
+.form-footer {
+  display: flex;
+  padding: 8px 0 0 0;
+}
+.form-footer .close {
+  margin-left: 10px;
+}
+/* /////////////////////////// */
+.lds-circle {
+  display: inline-block;
+  transform: translateZ(1px);
+}
+.lds-circle > div {
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  background: blue;
+  animation: lds-circle 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+.column-title {
+  padding: 8px 0 0 0;
+}
+
+.add-form-title {
+  height: 29px;
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+@keyframes lds-circle {
+  0%,
+  100% {
+    animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
+  }
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(1800deg);
+    animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1);
+  }
+  100% {
+    transform: rotateY(3600deg);
+  }
+}
