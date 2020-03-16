@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { signIn } from "../../../state/ducks/user/actions";
 import Input from "../../components/FormsComponent/SignInput/SignInput";
+import Select from "../../components/FormsComponent/Select/Select";
 
 class LoginForm extends Component {
   //
@@ -44,6 +45,29 @@ class LoginForm extends Component {
             component={Input}
             type="password"
             placeholder="Password"
+          />
+        </div>
+
+        <div className="">
+          <Field
+            label="Role"
+            name="user_role"
+            component={Select}
+            options={[
+              {
+                text: "Teacher",
+                value: "teacher"
+              },
+              {
+                text: "Student",
+                value: "student"
+              },
+              {
+                text: "Admin",
+                value: "admin"
+              }
+            ]}
+            defaultValue={"student"}
           />
         </div>
         <button type="submit" className="log-in-btn">

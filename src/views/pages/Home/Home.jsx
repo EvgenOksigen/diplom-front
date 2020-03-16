@@ -9,27 +9,33 @@ const Home = ({ user, location, ...params }) => {
   const { first_name } = user.user;
   return (
     <>
-      {/* {console.log(params.match)} */}
+      {console.log(params.match.params)}
       <div className="content-wrap">
         <Route path="/home" exact render={() => <BaseHome />} />
 
-        <Route
+        {/* <Route
           path={`/${location.pathname.split("/")[1]}/${first_name}`}
           exact
-          render={() => <Admin />}
+          render={() => <UserPage />}
         />
 
         <Route
           path={`/${location.pathname.split("/")[1]}/${first_name}/journal`}
           exact
-          render={() => <Admin />}
+          render={() => <Journal />}
         />
 
         <Route
           path={`/${location.pathname.split("/")[1]}/${first_name}/test`}
           exact
-          render={() => <Admin />}
+          render={() => <Test />}
         />
+
+        <Route
+          path={`/${location.pathname.split("/")[1]}/${first_name}/create-test`}
+          exact
+          render={() => <CreateTest />}
+        /> */}
       </div>
     </>
   );

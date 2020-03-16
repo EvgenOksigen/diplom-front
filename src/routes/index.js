@@ -8,9 +8,6 @@ import GuestRoute from './hoc/GuestRoute';
 import { me, setMe } from "../state/ducks/user/actions";
 import PrivateRoute from './hoc/PrivateRoute';
 import Home from '../views/pages/Home/Home';
-import Admin from '../views/pages/Admin/Admin';
-import Teacher from '../views/pages/Teacher/Teacher';
-import Student from '../views/pages/Student/Student';
 
 class App extends React.Component {
 
@@ -58,12 +55,6 @@ class App extends React.Component {
             <GuestRoute path="/login" exact component={Auth} />
 
             <PrivateRoute path="/home/:user?/:action?" exact component={Home}/>
-        
-            {/* <Route path="/home/admin" exact render={() => <Admin />} />
-
-            <Route path="/home/teacher" exact render={() => <Teacher />} />
-
-            <Route path="/home/student" exact render={() => <Student />} /> */}
 
           </Switch>
           )
