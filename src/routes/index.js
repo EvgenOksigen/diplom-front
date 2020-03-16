@@ -57,7 +57,7 @@ class App extends React.Component {
 
             <GuestRoute path="/login" exact component={Auth} />
 
-            <PrivateRoute path="/home/:user?" exact component={Home}/>
+            <PrivateRoute path="/home/:user?/:action?" exact component={Home}/>
         
             {/* <Route path="/home/admin" exact render={() => <Admin />} />
 

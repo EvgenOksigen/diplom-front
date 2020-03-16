@@ -3,9 +3,8 @@ import Header from "../../layout/Header/Header";
 import { connect } from "react-redux";
 import { compose } from "redux";
 
-const AdminHome = ({ ...params }) => (
+const AdminHome = () => (
   <>
-    {console.log("params", { params })}
     <Header />
     <div>Admin Home Page</div>
   </>
