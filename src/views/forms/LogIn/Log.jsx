@@ -46,8 +46,7 @@ class LoginForm extends Component {
             placeholder="Password"
           />
         </div>
-
-        <button name="log-in-bnt" className="log-in-btn" htmlType="submit">
+        <button type="submit" className="log-in-btn">
           <i className="fas fa-sign-in-alt"></i>
         </button>
       </form>

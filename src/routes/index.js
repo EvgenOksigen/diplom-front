@@ -40,7 +40,7 @@ class App extends React.Component {
   UNSAFE_componentWillReceiveProps(nextProps) {
     const { user } = nextProps;
 
-    if (user && user.isLogged && !user.email) {
+    if (user && user.isLogged && !user.user) {
       this.setState({ loading: true });
 
       this.getMe();
@@ -57,13 +57,13 @@ class App extends React.Component {
 
             <GuestRoute path="/login" exact component={Auth} />
 
-            <PrivateRoute path="/home" exact  component={Home}/>
+            <PrivateRoute path="/home/:user?/:action?" exact component={Home}/>
         
-            <Route path="/home/admin" exact render={() => <Admin />} />
+            {/* <Route path="/home/admin" exact render={() => <Admin />} />
 
             <Route path="/home/teacher" exact render={() => <Teacher />} />
 
-            <Route path="/home/student" exact render={() => <Student />} />
+            <Route path="/home/student" exact render={() => <Student />} /> */}
 
           </Switch>
           )
