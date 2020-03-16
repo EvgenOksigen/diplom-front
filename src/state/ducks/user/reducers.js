@@ -6,19 +6,20 @@ const initialState = null;
 const signInReducer = createReducer(initialState)({
   //
 
-  [types.SIGN_IN]: (state, { user }) => {
+  [types.SIGN_IN]: (state, {token}) => {
     return{
-      ...user,
+      ...state,
       isLogged: true,
+      token
   }
 },
 
   [types.SET_ME]: (state, { user }) => {
-    return ({
+    return {
     ...state,
     ...user,
     isLogged: true
-  })
+  }
 }, 
 
   [types.SIGN_OUT]: () => null

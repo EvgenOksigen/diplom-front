@@ -1,22 +1,20 @@
 import React from "react";
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter, Route } from "react-router-dom";
 import { compose } from "redux";
 import { connect } from "react-redux";
+import BaseHome from "../BaseHome/BaseHome";
 
 const Home = ({ user }) => (
   <>
-    {user && user.role === 0 ? (
-      <Redirect to="/home/admin" />
-    ) : user.role === 2 ? ( //user.email
-      <Redirect to="/home/student" />
-    ) : (
-      <Redirect to="/home/teacher" />
-    )}
+    <div>ku ku home {console.log("user")}</div>;
+    <div className="content-wrap">
+      <Route path="/home" exact render={() => <BaseHome />} />
+    </div>
   </>
 );
 
 const mapStateToProps = ({ user }) => ({ user });
 
-const enhance = compose(withRouter, connect(mapStateToProps, null));
+const enhance = compose(withRouter, connect(mapStateToProps));
 
 export default enhance(Home);

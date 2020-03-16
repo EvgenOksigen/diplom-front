@@ -14,7 +14,7 @@ const UserLogo = ({ user, signOut }) => {
       >
         LogOut
       </button>
-      <label className="user-info">{`${user.email}`}</label>
+      {/* <label className="user-info">{`${user.email}`}</label> */}
     </div>
   );
 };
