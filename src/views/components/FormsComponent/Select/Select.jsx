@@ -13,7 +13,7 @@ class Selecter extends Component {
     const {
       input,
       placeholder,
-      meta: { touched, error },
+      // meta: { touched, error },
       label,
       disabled,
       required,

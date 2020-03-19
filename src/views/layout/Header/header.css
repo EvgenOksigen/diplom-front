@@ -8,13 +8,19 @@
   padding: 4px 10px 4px 0px;
 }
 .log-out.btn {
-  width: auto;
+  width: 150px;
   color: white;
   border: 1px solid white;
   border-radius: 0;
   padding: 2px 4px;
   font-size: 16px;
   margin: 0 5px;
+  padding: 10px;
+}
+.log-out.btn:hover {
+  color: white;
+  font-weight: bold;
+  background-color: #ff6f00;
 }
 .nav-link-container {
   display: flex;

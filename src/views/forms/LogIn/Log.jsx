@@ -48,10 +48,11 @@ class LoginForm extends Component {
           />
         </div>
 
-        <div className="">
+        <div className="auth-form-field">
           <Field
             label="Role"
             name="user_role"
+            className="auth select-role"
             component={Select}
             options={[
               {
