@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { signOut } from "../../../state/ducks/user/actions";
 import "./UserLogo.css";
-import Select from "../../components/FormsComponent/Select/Select";
 
 const UserLogo = ({ profile, user, signOut }) => {
   return (
@@ -13,7 +12,7 @@ const UserLogo = ({ profile, user, signOut }) => {
           signOut();
         }}
       >
-        LogOut
+        <i className="fas fa-sign-in-alt"></i> LogOut
       </button>
       <div className="user-info">
         {`${user.email} `}

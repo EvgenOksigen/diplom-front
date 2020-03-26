@@ -55,3 +55,9 @@ code {
   width: 100%;
   pointer-events: none;
 }
+
+.content {
+  padding: 30px 20px;
+  flex-grow: 1;
+  position: relative;
+}

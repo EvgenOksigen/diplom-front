@@ -8,6 +8,8 @@ import GuestRoute from './hoc/GuestRoute';
 import { me, setMe } from "../state/ducks/user/actions";
 import PrivateRoute from './hoc/PrivateRoute';
 import Home from '../views/pages/Home/Home';
+import MainContainer from '../views/layout/MainContainer/MainContainer'
+import Content from '../views/layout/Content/Content'
 
 class App extends React.Component {
 
@@ -45,22 +47,21 @@ class App extends React.Component {
   }
 
   render () { 
-    const {loading}= this.state;
     return(
-      <>
-        {!loading && (
-          <Switch>
-            <Route path="/" exact component={DefaultRoute} />
+      <MainContainer /* className={cm({ [s.visualImpairments]: isChangeTheme })} */>
 
-            <GuestRoute path="/login" exact component={Auth} />
+        <Switch>
+              <Route path="/" exact component={DefaultRoute} />
 
-            <PrivateRoute path="/home/:user?/:action?" exact component={Home}/>
+              <GuestRoute path="/login" exact component={Auth} />
 
-          </Switch>
-          )
-        
-        }
-      </>
+              <PrivateRoute path="/home/:user?/:action?" exact component={Home}/>
+
+            </Switch>
+
+
+      </MainContainer>
+
      ) 
   }
 }

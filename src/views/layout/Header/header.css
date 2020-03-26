@@ -1,6 +1,6 @@
 .header-container {
   width: 100%;
-  flex: 1;
+  flex: 0 1;
   background-color: rgba(0, 0, 0, 1);
   display: flex;
   justify-content: space-between;
@@ -20,7 +20,7 @@
 .log-out.btn:hover {
   color: white;
   font-weight: bold;
-  background-color: #ff6f00;
+  background-color: black;
 }
 .nav-link-container {
   display: flex;
