@@ -10,20 +10,21 @@ import CreateTest from "../Test/CreateTest/CreateTest";
 import Footer from "../../layout/Footer/Footer";
 import Content from "../../layout/Content/Content";
 
-const Home = ({ user, location, ...params }) => {
+const Home = ({ user, location, match }) => {
   const { p_role } = user;
-
   return (
     <>
       <Header />
       <Content>
         <Route path="/home" exact render={() => <BaseHome />} />
 
-        {/* <Route
-          path={`/${location.pathname.split("/")[1]}/${p_role}`}
-          exact
-          render={() => <UserPage />}
-        /> */}
+        {/* {p_role && (
+          <Route
+            path={`/${location.pathname.split("/")[1]}/${p_role}`}
+            exact
+            render={() => <UserHome />}
+          />
+        )} */}
 
         <Route
           path={`/${location.pathname.split("/")[1]}/${p_role}/journal`}

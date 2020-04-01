@@ -9,7 +9,6 @@ import { me, setMe } from "../state/ducks/user/actions";
 import PrivateRoute from './hoc/PrivateRoute';
 import Home from '../views/pages/Home/Home';
 import MainContainer from '../views/layout/MainContainer/MainContainer'
-import Content from '../views/layout/Content/Content'
 
 class App extends React.Component {
 
@@ -47,10 +46,13 @@ class App extends React.Component {
   }
 
   render () { 
+    
     return(
       <MainContainer /* className={cm({ [s.visualImpairments]: isChangeTheme })} */>
 
-        <Switch>
+        {!this.state.loading &&(
+
+          <Switch>
               <Route path="/" exact component={DefaultRoute} />
 
               <GuestRoute path="/login" exact component={Auth} />
@@ -58,6 +60,8 @@ class App extends React.Component {
               <PrivateRoute path="/home/:user?/:action?" exact component={Home}/>
 
             </Switch>
+          ) 
+        }
 
 
       </MainContainer>

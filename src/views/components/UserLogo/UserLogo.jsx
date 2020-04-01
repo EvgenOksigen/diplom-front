@@ -15,7 +15,7 @@ const UserLogo = ({ profile, user, signOut }) => {
         <i className="fas fa-sign-in-alt"></i> LogOut
       </button>
       <div className="user-info">
-        {`${user.email} `}
+        {user && `${user.email} `}
         <div className="user-logo role">{`${profile.p_role}`}</div>
       </div>
     </div>

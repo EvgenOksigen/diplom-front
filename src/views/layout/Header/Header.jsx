@@ -41,6 +41,6 @@ const Header = ({ user, location }) => {
 
 const mapStateToProps = ({ user }) => ({ user });
 
-const enhance = compose(connect(mapStateToProps, null), withRouter);
+const enhance = compose(connect(mapStateToProps), withRouter);
 
 export default enhance(Header);
