@@ -21,9 +21,7 @@ user.birth_date = moment(user.birth_date).format("DD-MM-YYYY")
 
 return ({
   type: types.SET_ME,
-  user: {
     ...user,
-  }
 })
 }
 
