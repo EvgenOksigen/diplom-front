@@ -17,6 +17,9 @@ export default {
       headers: setHeader()
     };
     return axios(config).then(res => res && res.data)
+  },
+
+  signup: values => {
+    return axios.post(`${USER_API}/signup`, values).then(res => res && res.data)
   }
-  
 };

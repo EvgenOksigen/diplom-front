@@ -23,11 +23,10 @@ const Input = ({
       )}
 
       <input
+        className="form-input"
         {...input}
         placeholder={placeholder}
-        onChange={e => {
-          input.onChange(e);
-        }}
+        onChange={input.onChange}
         type={type}
       />
     </>

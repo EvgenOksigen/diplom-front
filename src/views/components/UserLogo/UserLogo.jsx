@@ -22,7 +22,7 @@ const UserLogo = ({ profile, user, signOut }) => {
   );
 };
 
-const mapStateToProps = ({ user }) => ({ profile: user, user: user.user });
+const mapStateToProps = ({ user }) => ({ user, profile: user.profile });
 
 const mapDispatchToProps = { signOut };
 

@@ -1,12 +1,12 @@
 import React from "react";
-import "./header.css";
+import "./header.scss";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import UserLogo from "../../components/UserLogo/UserLogo";
 import { compose } from "redux";
 
-const Header = ({ user, location }) => {
-  const { p_role } = user;
+const Header = ({ profile, location }) => {
+  const { p_role } = profile;
   return (
     <div className="header-container">
       <UserLogo />
@@ -39,7 +39,7 @@ const Header = ({ user, location }) => {
   );
 };
 
-const mapStateToProps = ({ user }) => ({ user });
+const mapStateToProps = ({ user }) => ({ profile: user.profile });
 
 const enhance = compose(connect(mapStateToProps), withRouter);
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { reduxForm, Field } from "redux-form";
+import { reduxForm, Field, Form } from "redux-form";
 import "./LogIn.css";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -60,9 +60,10 @@ class LoginForm extends Component {
     const { handleSubmit, signIn } = this.props;
 
     handleSubmit(values => {
-      console.log(values);
-
-      signIn(values);
+      signIn(values).then(res => {
+        console.log({ res });
+        // console.log({res.data}})
+      });
     })();
   };
 
@@ -78,7 +79,7 @@ class LoginForm extends Component {
             Download
           </button>
         </div>
-        <form
+        <Form
           autoComplete="off"
           className="login-form paper"
           onSubmit={this.formSubmit}
@@ -130,7 +131,7 @@ class LoginForm extends Component {
           <button type="submit" className="log-in-btn">
             <i className="fas fa-sign-in-alt"></i>
           </button>
-        </form>
+        </Form>
       </>
     );
   }

@@ -9,9 +9,10 @@ import Test from "../Test/PassTest/Test";
 import CreateTest from "../Test/CreateTest/CreateTest";
 import Footer from "../../layout/Footer/Footer";
 import Content from "../../layout/Content/Content";
+import AddUser from "../AddUser/AddUser";
 
-const Home = ({ user, location, match }) => {
-  const { p_role } = user;
+const Home = ({ profile, location, match }) => {
+  const { p_role } = profile;
   return (
     <>
       <Header />
@@ -25,7 +26,6 @@ const Home = ({ user, location, match }) => {
             render={() => <UserHome />}
           />
         )} */}
-
         <Route
           path={`/${location.pathname.split("/")[1]}/${p_role}/journal`}
           exact
@@ -43,13 +43,19 @@ const Home = ({ user, location, match }) => {
           exact
           render={() => <CreateTest />}
         />
+        {/* 
+        <Route
+          path={`/${location.pathname.split("/")[1]}/${p_role}/add-user`}
+          exact
+          render={() => <AddUser />}
+        /> */}
       </Content>
       <Footer />
     </>
   );
 };
 
-const mapStateToProps = ({ user }) => ({ user });
+const mapStateToProps = ({ user }) => ({ profile: user.profile });
 
 const enhance = compose(withRouter, connect(mapStateToProps));
 
