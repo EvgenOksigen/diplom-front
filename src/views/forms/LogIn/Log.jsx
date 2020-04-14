@@ -43,7 +43,7 @@ class LoginForm extends Component {
   getAll = () => {
     let config = {
       method: "GET",
-      url: "http://localhost:4444/api/users/all"
+      url: "http://localhost:4444/api/users/test"
     };
     Axios(config).then(res => {
       console.log(res.data);
@@ -60,8 +60,9 @@ class LoginForm extends Component {
     const { handleSubmit, signIn } = this.props;
 
     handleSubmit(values => {
+      console.log(values);
+      
       signIn(values).then(res => {
-        console.log({ res });
         // console.log({res.data}})
       });
     })();
