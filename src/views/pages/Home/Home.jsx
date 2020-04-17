@@ -19,13 +19,6 @@ const Home = ({ profile, location, match }) => {
       <Content>
         <Route path="/home" exact render={() => <BaseHome />} />
 
-        {/* {p_role && (
-          <Route
-            path={`/${location.pathname.split("/")[1]}/${p_role}`}
-            exact
-            render={() => <UserHome />}
-          />
-        )} */}
         <Route
           path={`/${location.pathname.split("/")[1]}/${p_role}/journal`}
           exact

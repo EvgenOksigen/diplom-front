@@ -1,9 +1,7 @@
 import React from "react";
 import { Radio, Form } from "antd";
 
-const RadioButton = ({ disabled, input, label, required, options = [], ...rest }) => {
-  // console.log(rest);
-  
+const RadioButton = ({ disabled, input, options = [], touched, error, right }) => {
   return (
     <Form.Item className="test-form-item radio-field">
       <Radio.Group disabled={disabled} buttonStyle="solid" {...input}>
@@ -16,7 +14,7 @@ const RadioButton = ({ disabled, input, label, required, options = [], ...rest }
 
       <div className="verticalLine" />
 
-      <label className={required && "required"}>{label}</label>
+      <p className="form-item_error ant-form-explain">{touched && error}</p>
     </Form.Item>
   );
 };

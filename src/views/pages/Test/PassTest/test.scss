@@ -8,6 +8,15 @@
     margin-top: 5px;
     .qwestion{
         text-align: left;
+        >span{
+            border-radius: 50%;
+            border: 1px solid;
+            padding: 2px 4px;
+            margin-right: 15px;
+            &.right{
+                background-color: greenyellow;
+            }
+        }
         .answer-list{
             margin: 10px 0 ;
             display: flex;

@@ -1,21 +1,28 @@
 import React from 'react'
-import { reduxForm, getFormValues, Form, Field } from 'redux-form';
+import { reduxForm, Form, Field } from 'redux-form';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
-import Input from '../../components/FormsComponent/SignInput/SignInput';
 import RadioButton from '../../components/FormsComponent/Radio/RadioButton';
+import Axios from 'axios';
+import { useState } from 'react';
 
 const TestForm = ({test, handleSubmit}) => {
+  const [rightAnswer, setRightAnswer] = useState([])
+  let res
     const formSubmit = e =>{
       e.preventDefault();
-      handleSubmit(values=>{
-        console.log(values)
-      
+
+      handleSubmit(async values=>{
+        if(!values.answers){
+          window.alert('not one answers ...')
+          return
+        }
+        res = await Axios.post("http://localhost:4444/api/users/test-right", values).then(res => res.data)
+        setRightAnswer(res)
       })()
     }
     return(
-        <div className="test-wrapp">
+      <div className="test-wrapp">
         <div key="kek">{test.test_json.test.discipline._text} </div>
         <div className="kek">{test.test_json.test.title._text} </div>
             <Form 
@@ -24,7 +31,7 @@ const TestForm = ({test, handleSubmit}) => {
               onSubmit={formSubmit}>
                 {test.test_json.test.item.map((qw,qi)=>{
                 return (
-                  <div className="qwestion" key={qi}>{qw.question._text} {`cost:${qw._attributes.cost}`}
+                  <div className="qwestion" key={qi}> <span className={rightAnswer[qi]?'right':null}>{`${qw._attributes.cost}$`}</span>{qw.question._text} 
                     <div className="answer-list">
                     {qw.answer.map((answer,ai)=>{
                       return(
@@ -34,7 +41,6 @@ const TestForm = ({test, handleSubmit}) => {
                           component={RadioButton}
                           options={[
                             { value: answer._text, text: answer._text},
-
                           ]}
                           />
                         )
