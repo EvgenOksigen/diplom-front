@@ -9,10 +9,9 @@ import Test from "../Test/PassTest/Test";
 import CreateTest from "../Test/CreateTest/CreateTest";
 import Footer from "../../layout/Footer/Footer";
 import Content from "../../layout/Content/Content";
-import AddUser from "../AddUser/AddUser";
+import AddCourse from "../AddCourse/AddCourse";
 
-const Home = ({ profile, location, match }) => {
-  const { p_role } = profile;
+const Home = ({ location }) => {
   return (
     <>
       <Header />
@@ -20,28 +19,28 @@ const Home = ({ profile, location, match }) => {
         <Route path="/home" exact render={() => <BaseHome />} />
 
         <Route
-          path={`/${location.pathname.split("/")[1]}/${p_role}/journal`}
+          path={`/${location.pathname.split("/")[1]}/journal`}
           exact
           render={() => <Journal />}
         />
 
         <Route
-          path={`/${location.pathname.split("/")[1]}/${p_role}/test`}
+          path={`/${location.pathname.split("/")[1]}/test`}
           exact
           render={() => <Test />}
         />
 
         <Route
-          path={`/${location.pathname.split("/")[1]}/${p_role}/create-test`}
+          path={`/${location.pathname.split("/")[1]}/create-test`}
           exact
           render={() => <CreateTest />}
         />
-        {/* 
+        
         <Route
-          path={`/${location.pathname.split("/")[1]}/${p_role}/add-user`}
+          path={`/${location.pathname.split("/")[1]}/add-course`}
           exact
-          render={() => <AddUser />}
-        /> */}
+          render={() => <AddCourse />}
+        />
       </Content>
       <Footer />
     </>

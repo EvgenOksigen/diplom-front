@@ -10,11 +10,11 @@ let AddUserForm = ({ handleSubmit, showingForm }) => {
     e.preventDefault();
 
     handleSubmit(async values => {
-      let fd = {
+      let formData = {
         ...values,
         all_roles: values.all_roles.split(",")
       };
-      await api.users.signup(fd).then(res => {
+      await api.users.signup(formData).then(res => {
         alert(`User has been created : ${JSON.stringify(res, null, 4)}`); //TODO antd message
         showingForm();
         return res;

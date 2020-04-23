@@ -37,8 +37,6 @@ class App extends React.Component {
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     const { user } = nextProps;
-    console.log(this.props.user ,user );
-    
     if (user && user.isLogged && !user.profile) {
       this.setState({ loading: true });
 

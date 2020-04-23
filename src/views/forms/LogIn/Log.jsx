@@ -13,31 +13,44 @@ class LoginForm extends Component {
   uploadHandler = e => {
     console.log(e.target.files);
     let fileList = e.target.files;
-    const reader = new FileReader();
+    const formData = new FormData()
 
-    if (fileList[0] && fileList[0].type !== "text/csv") {
-      alert("Only **.csv file format");
-      e.target.value = "";
-      return;
-    } else if (fileList && fileList[0]) {
-      reader.readAsDataURL(fileList[0]);
-      reader.onload = e => {
-        const fd = {
-          data: e.target.result,
-          name: fileList[0].name,
-          type: fileList[0].type
-        };
-
-        Axios.post(
-          "http://localhost:4444/api/users/upload-csv",
-          fd
-          // e.target.result
-        ).then(res => {
-          console.log(res.data);
-          return res.data;
-        });
-      };
+    for (let i = 0; i < fileList.length; i++) {
+      formData.append(`files`, fileList[i])
     }
+    Axios.post(
+      "http://localhost:4444/api/users/upload-csv",
+      formData
+      // e.target.result
+    ).then(res => {
+      console.log(res.data);
+      return res.data;
+    });    
+    // const reader = new FileReader();
+
+    // if (fileList[0] && fileList[0].type !== "text/csv") {
+    //   alert("Only **.csv file format");
+    //   e.target.value = "";
+    //   return;
+    // } else if (fileList && fileList[0]) {
+    //   reader.readAsDataURL(fileList[0]);
+    //   reader.onload = e => {
+    //     const fd = {
+    //       data: e.target.result,
+    //       name: fileList[0].name,
+    //       type: fileList[0].type
+    //     };
+
+    //     Axios.post(
+    //       "http://localhost:4444/api/users/upload-csv",
+    //       fd
+    //       // e.target.result
+    //     ).then(res => {
+    //       console.log(res.data);
+    //       return res.data;
+    //     });
+    //   };
+    // }
   };
 
   getAll = () => {
@@ -72,7 +85,7 @@ class LoginForm extends Component {
     return (
       <>
         <div>
-          <input type="file" onChange={this.uploadHandler} />
+          <input type="file" name="attachment" onChange={this.uploadHandler} multiple/>
           <button type="button" onClick={this.getAll}>
             GetAll
           </button>

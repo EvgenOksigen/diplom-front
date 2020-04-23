@@ -1,0 +1,31 @@
+.create-course{
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 900px;
+    text-align: left;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    &-left, &-right{
+        display: flex;
+        padding: 10px;
+        flex-direction: column;
+    }
+    &-center{
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        max-width: 600px;
+        padding: 10px;
+        .goal-container{
+            display: flex;
+            flex-direction: column;
+            h3{
+                text-align: center;
+            }
+        }
+    }
+}
