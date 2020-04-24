@@ -1,6 +1,6 @@
 import React from "react";
 
-const Input = ({
+const TextArea = ({
   input,
   meta: { touched, error },
   type,
@@ -22,7 +22,7 @@ const Input = ({
         </label>
       )}
 
-      <input
+      <textarea
         className="form-input"
         {...input}
         placeholder={placeholder}
@@ -33,4 +33,4 @@ const Input = ({
   );
 };
 
-export default Input;
+export default TextArea;

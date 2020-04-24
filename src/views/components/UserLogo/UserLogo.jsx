@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { signOut } from "../../../state/ducks/user/actions";
 import "./UserLogo.css";
 
-const UserLogo = ({ user, signOut }) => {
+const UserLogo = ({ profile, user, signOut }) => {
   return (
     <div className="user-logo-container">
       <button
@@ -12,14 +12,17 @@ const UserLogo = ({ user, signOut }) => {
           signOut();
         }}
       >
-        LogOut
+        <i className="fas fa-sign-in-alt"></i> LogOut
       </button>
-      {/* <label className="user-info">{`${user.email}`}</label> */}
+      <div className="user-info">
+        {user && `${user.email} `}
+        <div className="user-logo role">{`${profile.p_role}`}</div>
+      </div>
     </div>
   );
 };
 
-const mapStateToProps = ({ user }) => ({ user });
+const mapStateToProps = ({ user }) => ({ user, profile: user.profile });
 
 const mapDispatchToProps = { signOut };
 

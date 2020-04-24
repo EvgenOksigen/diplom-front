@@ -1,11 +1,12 @@
-import React from "react";
-import "./header.css";
+import React, {useState} from "react";
+import "./header.scss";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import UserLogo from "../../components/UserLogo/UserLogo";
 import { compose } from "redux";
+import Menu from "../../components/Menu-dd/Menu";
 
-const Header = ({ user, location }) => {
+const Header = ({ location }) => {
   return (
     <div className="header-container">
       <UserLogo />
@@ -13,10 +14,49 @@ const Header = ({ user, location }) => {
       <nav>
         <div className="nav-link-container">
           <>
-            <Link className="nav-link" to={`${location.pathname}/journal`}>
+          <Menu title='Home'> 
+            <Link
+                className="nav-link"
+                  to={`/${location.pathname.split("/")[1]}/`}
+                >
+                  <span>Home</span>
+                </Link>
+                <Link
+                  className="nav-link"
+                  to={`/${location.pathname.split("/")[1]}/journal`}
+                  >
+                  <span>Journal</span>
+                </Link>
+                <Link
+                  className="nav-link"
+                  to={`/${location.pathname.split("/")[1]}/add-course`}
+                  >
+                  Course
+                </Link>
+          </Menu>
+          
+            <Link
+              className="nav-link"
+              to={`/${location.pathname.split("/")[1]}/`}
+              >
+              Home
+            </Link>
+            <Link
+              className="nav-link"
+              to={`/${location.pathname.split("/")[1]}/add-course`}
+            >
+              Course
+            </Link>    
+            <Link
+              className="nav-link"
+              to={`/${location.pathname.split("/")[1]}/journal`}
+            >
               Journal
             </Link>
-            <Link className="nav-link" to={`${location.pathname}/test`}>
+            <Link
+              className="nav-link"
+              to={`/${location.pathname.split("/")[1]}/test`}
+            >
               Tests
             </Link>
           </>
@@ -26,8 +66,7 @@ const Header = ({ user, location }) => {
   );
 };
 
-const mapStateToProps = ({ user }) => ({ user });
 
-const enhance = compose(connect(mapStateToProps, null), withRouter);
+const enhance = compose(connect(null), withRouter);
 
 export default enhance(Header);

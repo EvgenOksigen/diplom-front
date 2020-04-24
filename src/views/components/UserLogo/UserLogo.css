@@ -7,4 +7,9 @@
 .user-info {
   color: white;
   letter-spacing: 2px;
+  text-align: left;
+  margin-left: 5px;
+}
+.user-logo.role {
+  font-size: 12px;
 }

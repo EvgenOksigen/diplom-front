@@ -9,7 +9,7 @@ import store from './state/store'
 
 
 import 'bootstrap/dist/css/bootstrap.min.css'
-import './index.css';
+import './index.scss';
 
 import * as serviceWorker from './serviceWorker';
 import {App} from './routes/loadable';

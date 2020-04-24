@@ -15,8 +15,8 @@ const PrivateRoute = ({ component: Component, user, ...rest }) => {
       return <Redirect to="/" />;
     }}
   />
-);
-  }
+  );
+}
 
 const mapStateToProps = ({user}) => ({user});
 

@@ -1,8 +1,6 @@
 import * as types from "./types";
 import api from '../../../api'; // like api
 import moment from 'moment'
-import { isStudent, isKhai_mail, isAdmin } from "../../../helpers/validate";
-
 
 export const userSignIn = ( {token} ) => { 
   
@@ -20,15 +18,10 @@ export const userSignIn = ( {token} ) => {
 export const setMe = user =>{
 
 user.birth_date = moment(user.birth_date).format("DD-MM-YYYY")
-let role = isKhai_mail(user.email) ? 
-              (isStudent(user.email) ? 2 : isAdmin(user.email) ? 0 : 1):null;
 
 return ({
   type: types.SET_ME,
-  user: {
     ...user,
-    role
-  }
 })
 }
 
