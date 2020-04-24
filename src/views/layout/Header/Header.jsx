@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import UserLogo from "../../components/UserLogo/UserLogo";
 import { compose } from "redux";
+import Menu from "../../components/Menu-dd/Menu";
 
 const Header = ({ location }) => {
-  const [show, setShow]=useState(false)
   return (
     <div className="header-container">
       <UserLogo />
@@ -14,33 +14,27 @@ const Header = ({ location }) => {
       <nav>
         <div className="nav-link-container">
           <>
-          <div className= {show ? "nav-link active" : 'nav-link'} onClick={()=>setShow(!show)}>
-            <div className="menu">
-                <Link
-                  className="nav-link"
+          <Menu title='Home'> 
+            <Link
+                className="nav-link"
                   to={`/${location.pathname.split("/")[1]}/`}
                 >
                   <span>Home</span>
                 </Link>
                 <Link
-              className="nav-link"
-              to={`/${location.pathname.split("/")[1]}/journal`}
-            >
-              <span>
-                Journal
-              </span>
-            </Link>
-            <Link
-              className="nav-link"
-              to={`/${location.pathname.split("/")[1]}/test`}
-            >
-              <span>
-              Tests
-              </span>
-            </Link>
-            </div>
-              Home
-          </div>
+                  className="nav-link"
+                  to={`/${location.pathname.split("/")[1]}/journal`}
+                  >
+                  <span>Journal</span>
+                </Link>
+                <Link
+                  className="nav-link"
+                  to={`/${location.pathname.split("/")[1]}/add-course`}
+                  >
+                  Course
+                </Link>
+          </Menu>
+          
             <Link
               className="nav-link"
               to={`/${location.pathname.split("/")[1]}/`}

@@ -5,39 +5,13 @@ import Select from '../../components/FormsComponent/Select/Select'
 import TextArea from '../../components/FormsComponent/TextArea/TextArea'
 import { connect } from "react-redux";
 import { compose } from "redux";
+import FUploaderMulter from "../../components/FormsComponent/FileUploader/fUploaderMulter";
 
 import './AddCourse.scss'
+import api from "../../../api";
 
 const AddCourse = () =>{
-    const uploadHandler = (e) => {
-        console.log(e.target.files);
-        let fileList = e.target.files;
-        
-        let formData = new FormData();
-        
-        for (let i = 0; i < fileList.length; i++) {
-            formData.append(`file${i + 1}`, fileList[i]);
-        }
-        console.log(formData);
-        
-        // const reader = new FileReader();
-        // if (fileList[0] && fileList[0].type !== "text/csv") {
-        //   alert("Only **.csv file format");
-        //   e.target.value = "";
-        //   return;
-        // } else if (fileList && fileList[0]) {
-        //   reader.readAsDataURL(fileList[0]);
-        //   reader.onload = e => {
-        //     const fd = {
-        //       data: e.target.result,
-        //       name: fileList[0].name,
-        //       type: fileList[0].type
-        //     };
-        //     console.log(fd);
-        //     };
-        // }
-      };
-
+//
     const formSubmit=(e)=>{
         e.preventDefault()
     }
@@ -179,9 +153,18 @@ const AddCourse = () =>{
                 defaultValue={"rr-work"}
                 />
                 <Field
-                    name="attachment"
-                    component={()=><input type="file" />}
-                    onChange={uploadHandler} multiple 
+                    label="Загрузите лабораторные"
+                    name="labs"
+                    component={FUploaderMulter}
+                    uploadReq={api}
+                    multiple 
+                    />
+                <Field
+                    label="Загрузите модули"
+                    name="modules"
+                    component={FUploaderMulter}
+                    uploadReq={api.users.me}
+                    multiple 
                     />
             </div>
             
@@ -231,6 +214,9 @@ const AddCourse = () =>{
                         type="text"
                         placeholder="Иметь представление"
                     />
+                </div>
+                <div className="form-footer">
+                    <button type="submit"> Save/Create</button>
                 </div>
             </div>
             {/* <Field />*/}
