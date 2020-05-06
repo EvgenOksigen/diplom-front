@@ -27,11 +27,11 @@ const Test = ({ profile }) => {
     <>
       <div>User will pass the test here</div>
       {profile.p_role === "student" ? (
-        <button onClick={()=>get()}>Pass</button>
+        <button onClick={()=>get()}>Pass</button> // TODO List all posible tests for this user
       ) : (
         <>
           <button onClick={()=>get()}>Pass</button>
-          <button >Create</button>
+          <button>Create</button>
         </>
       )}
         {test.test_json && <TestForm test={test}/>}

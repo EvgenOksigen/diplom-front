@@ -5,10 +5,9 @@ import Select from '../../components/FormsComponent/Select/Select'
 import TextArea from '../../components/FormsComponent/TextArea/TextArea'
 import { connect } from "react-redux";
 import { compose } from "redux";
-import FUploaderMulter from "../../components/FormsComponent/FileUploader/fUploaderMulter";
-
 import './AddCourse.scss'
 import api from "../../../api";
+import FUploaderMulter from "../../components/FormsComponent/FileUploader/fUploaderMulter";
 
 const AddCourse = () =>{
 //
@@ -156,14 +155,15 @@ const AddCourse = () =>{
                     label="Загрузите лабораторные"
                     name="labs"
                     component={FUploaderMulter}
-                    uploadReq={api}
+                    uploadReq={api.attachment.upload}
+                    value={null}
                     multiple 
                     />
                 <Field
                     label="Загрузите модули"
                     name="modules"
                     component={FUploaderMulter}
-                    uploadReq={api.users.me}
+                    uploadReq={api.attachment.upload}
                     multiple 
                     />
             </div>

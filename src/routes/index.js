@@ -26,7 +26,7 @@ class App extends React.Component {
 
     const token = localStorage.getItem("token");
 
-     if (token) {
+    if (token) {
       await me().catch(() => {
         localStorage.removeItem("token");
       });

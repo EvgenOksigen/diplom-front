@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import "./header.scss";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
@@ -8,60 +8,60 @@ import Menu from "../../components/Menu-dd/Menu";
 
 const Header = ({ location }) => {
   return (
-    <div className="header-container">
+    <div className="header">
+      <div className="header-container">
       <UserLogo />
 
       <nav>
         <div className="nav-link-container">
           <>
-          <Menu title='Home'> 
-            <Link
-                className="nav-link"
-                  to={`/${location.pathname.split("/")[1]}/`}
-                >
-                  <span>Home</span>
-                </Link>
-                <Link
-                  className="nav-link"
-                  to={`/${location.pathname.split("/")[1]}/journal`}
-                  >
-                  <span>Journal</span>
-                </Link>
-                <Link
-                  className="nav-link"
-                  to={`/${location.pathname.split("/")[1]}/add-course`}
-                  >
-                  Course
-                </Link>
-          </Menu>
-          
-            <Link
+          <Link
               className="nav-link"
               to={`/${location.pathname.split("/")[1]}/`}
-              >
+            >
               Home
+          </Link>
+
+          <Link
+              className="nav-link"
+              to={`/${location.pathname.split("/")[1]}/journal`}
+              >
+              Journal
+          </Link>
+
+          <Menu title='Tests'> 
+            <Link
+                className="nav-link"
+                to={`/${location.pathname.split("/")[1]}/test`}
+              >
+                Tests
             </Link>
+            <Link
+              className="nav-link"
+              to={`/${location.pathname.split("/")[1]}/create-test`}
+              >
+                Test constructor
+            </Link>
+          </Menu>
+
+          <Menu title='Course'> 
             <Link
               className="nav-link"
               to={`/${location.pathname.split("/")[1]}/add-course`}
-            >
-              Course
-            </Link>    
-            <Link
-              className="nav-link"
-              to={`/${location.pathname.split("/")[1]}/journal`}
-            >
-              Journal
+              >
+                Add course
             </Link>
             <Link
               className="nav-link"
-              to={`/${location.pathname.split("/")[1]}/test`}
-            >
-              Tests
+              to={`/${location.pathname.split("/")[1]}/course-list`}
+              >
+                Course list
             </Link>
+          </Menu>
           </>
         </div>
       </nav>
+    </div>
     </div>
   );
 };

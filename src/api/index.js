@@ -3,6 +3,7 @@ import axios from 'axios'
 import contacts from './contacts'
 import users from './users'
 import tasks from './tasks';
+import attachment from './attachment/attachment'
 
 import store from '../state/store'
 
@@ -22,5 +23,6 @@ export const setHeader = () => {
 export default {
   contacts,
   users,
+  attachment,
   tasks
 };
