@@ -8,18 +8,17 @@ import TextArea from "../../../components/FormsComponent/TextArea/TextArea";
 let CreateTest = () => {
   const additionalAnswers = ({fields, itemIndex}) => (
     <>
-    {console.log(itemIndex)}
     {fields.map((item, index) => (
       <div className="answer"
-      key={index}>
+      key={item}>
 
         <Field
           key={index}
-          name={`answer.${index+1}_ToQuestion_$`}
+          name={`answer.${index+1}_ToQuestion_${item}`}
           component={Input}
           label="Введите вариант ответа"
           placeholder="Oтвет"
-        />
+          />
         <button className='del-btn' onClick={() => fields.splice(index, 1)}>
         <i className="fas fa-minus-circle"></i>
             </button>
@@ -64,7 +63,7 @@ let CreateTest = () => {
           <div key={index} className='answer-list'>
               <FieldArray 
                   className='createTest-container'
-                  name="answers"
+                  name={`answers.${index}`}
                   component={additionalAnswers}
                   itemIndex={index+1}
                   />
