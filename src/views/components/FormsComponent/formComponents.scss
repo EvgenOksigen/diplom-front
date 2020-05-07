@@ -1,0 +1,22 @@
+.form-checkbox-container, .del-btn-container{
+    display: flex;
+    .form-checkbox{
+    width: 100%;
+    min-width: 10px;
+    height: fit-content;
+}
+.react-tooltip-lite{
+    background-color: #303030;
+    border-radius: 8px;
+    color: #ff6f00;
+    margin-top: -10px;
+        &-arrow{
+            margin-top: -10px;
+            margin-left: -2px;
+        }
+    }
+}
+
+*{
+    outline: unset;
+}

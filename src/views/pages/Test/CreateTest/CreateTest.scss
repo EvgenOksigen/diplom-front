@@ -47,6 +47,7 @@
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
+            align-items: center;
             label{
                 width: 100%;
             }
@@ -54,8 +55,45 @@
                 max-width: 90%;
                 width: 100%;
             }
+            .form-checkbox{   
+                position: relative;
+                width: 15px;
+                border: 1px solid red;
+                background: black;
+                height: 15px;
+                max-height: fit-content;
+                margin: 0px 10px 0 5px;
+                &:checked{
+                    width: 0;
+                    height: 0;
+                    margin-right: 15px;
+                &::before{
+                    content: '';
+                    background: url('../../../../img/iconfinder_tick_green_619543.png') no-repeat center;
+                    background-size: cover;
+                    height: 20px;
+                    width: 17px;
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    margin: auto;
+                }
+            }
+            }
             .del-btn, .add-btn{
-                max-width: 35px;
+                max-width: fit-content;
+                margin: 0;
+                border: none;
+                background: none;
+                outline: unset;
+                cursor: unset;
+                i{
+                    cursor: pointer;
+                    outline: unset;
+
+                }
             }
         }
     }

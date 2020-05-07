@@ -35,7 +35,7 @@ const Home = ({ location }) => {
           exact
           render={() => <CreateTest />}
         />
-        
+
         <Route
           path={`/${location.pathname.split("/")[1]}/add-course`}
           exact

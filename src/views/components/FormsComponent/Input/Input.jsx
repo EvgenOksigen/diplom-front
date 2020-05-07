@@ -15,7 +15,8 @@ const Input = ({
         <label>&nbsp;</label>
       ) : (
         <label className={required && "required"}>
-          {label}{label && ": "}
+          {label}
+          {label && ": "}
           {notification && (
             <span className="notification">( {notification} )</span>
           )}
