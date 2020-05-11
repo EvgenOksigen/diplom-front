@@ -10,62 +10,61 @@ const Header = ({ location }) => {
   return (
     <div className="header">
       <div className="header-container">
-      <UserLogo />
+        <UserLogo />
 
-      <nav>
-        <div className="nav-link-container">
-          <>
-          <Link
-              className="nav-link"
-              to={`/${location.pathname.split("/")[1]}/`}
-            >
-              Home
-          </Link>
-
-          <Link
-              className="nav-link"
-              to={`/${location.pathname.split("/")[1]}/journal`}
-              >
-              Journal
-          </Link>
-
-          <Menu title='Tests'> 
-            <Link
+        <nav>
+          <div className="nav-link-container">
+            <>
+              <Link
                 className="nav-link"
-                to={`/${location.pathname.split("/")[1]}/test`}
+                to={`/${location.pathname.split("/")[1]}/`}
               >
-                Tests
-            </Link>
-            <Link
-              className="nav-link"
-              to={`/${location.pathname.split("/")[1]}/create-test`}
-              >
-                Test constructor
-            </Link>
-          </Menu>
+                Home
+              </Link>
 
-          <Menu title='Course'> 
-            <Link
-              className="nav-link"
-              to={`/${location.pathname.split("/")[1]}/add-course`}
+              <Link
+                className="nav-link"
+                to={`/${location.pathname.split("/")[1]}/journal`}
               >
-                Add course
-            </Link>
-            <Link
-              className="nav-link"
-              to={`/${location.pathname.split("/")[1]}/course-list`}
-              >
-                Course list
-            </Link>
-          </Menu>
-          </>
-        </div>
-      </nav>
-    </div>
+                Journal
+              </Link>
+
+              <Menu title="Tests">
+                <Link
+                  className="nav-link"
+                  to={`/${location.pathname.split("/")[1]}/test`}
+                >
+                  Tests
+                </Link>
+                <Link
+                  className="nav-link"
+                  to={`/${location.pathname.split("/")[1]}/create-test`}
+                >
+                  Test constructor
+                </Link>
+              </Menu>
+
+              <Menu title="Course">
+                <Link
+                  className="nav-link"
+                  to={`/${location.pathname.split("/")[1]}/add-course`}
+                >
+                  Add course
+                </Link>
+                <Link
+                  className="nav-link"
+                  to={`/${location.pathname.split("/")[1]}/course-list`}
+                >
+                  Course list
+                </Link>
+              </Menu>
+            </>
+          </div>
+        </nav>
+      </div>
     </div>
   );
 };
-
 
 const enhance = compose(connect(null), withRouter);
 

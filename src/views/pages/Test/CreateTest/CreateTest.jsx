@@ -6,6 +6,7 @@ import "./CreateTest.scss";
 import TextArea from "../../../components/FormsComponent/TextArea/TextArea";
 import Checkbox from "../../../components/FormsComponent/Checkbox/Checkbox";
 import Tooltip from "react-tooltip-lite";
+import Axios from "axios";
 
 let CreateTest = ({ handleSubmit }) => {
   const additionalAnswers = ({ fields, itemIndex }) => {
@@ -96,6 +97,9 @@ let CreateTest = ({ handleSubmit }) => {
     e.preventDefault();
     handleSubmit(values => {
       console.log(values);
+      Axios.post("http://localhost:3010/api/auth/create-test", {
+        test: values
+      });
     })();
   };
 

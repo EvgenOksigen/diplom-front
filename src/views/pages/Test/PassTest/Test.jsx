@@ -2,42 +2,43 @@ import React from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
-import './test.scss'
+import "./test.scss";
 import Axios from "axios";
 import { useState } from "react";
-import TestForm from "../../../forms/TestForm/TestForm";
 import { useEffect } from "react";
 
-const Test = ({ profile }) => {
-  const [allTest, setAllTest] = useState([])
-  useEffect(()=>{
-    getAllTest()
-  },
-  [])
-  const [test, setTest] = useState({})
-  const get = async ()=>{
-    await Axios.get("http://localhost:4444/api/users/test").then(res => setTest(res.data[0]))
-  }
-  const getAllTest = async () =>{
-    await Axios.get("http://localhost:4444/api/users/test/all").then(res => setAllTest(res.data));
-  }
-  console.log(allTest);
-  
+const Test = ({ profile, history, location }) => {
+  const [allTest, setAllTest] = useState([]);
+  useEffect(() => {
+    getAllTest();
+  }, []);
+
+  console.log(location.pathname.split("/")[1]);
+
+  const getAllTest = async () => {
+    await Axios.get("http://localhost:3010/api/auth/allTest").then(res =>
+      setAllTest(res.data)
+    );
+  };
+  const getTestById = async id => {
+    history.push(`/${location.pathname.split("/")[1]}/test/${id}?`);
+  };
+
   return (
     <>
       <div>User will pass the test here</div>
-      {profile.p_role === "student" ? (
-        <button onClick={()=>get()}>Pass</button> // TODO List all posible tests for this user
-      ) : (
-        <>
-          <button onClick={()=>get()}>Pass</button>
-          <button>Create</button>
-        </>
-      )}
-        {test.test_json && <TestForm test={test}/>}
-        {allTest.length && allTest.map((el, i) =>{
-          return <div key={el.id}> {`${el.passed} ${el.test_json.test.discipline._text}, ${el.test_json.test.title._text}`} </div>
-        })}
+      {allTest.length &&
+        allTest.map(el => (
+          <div key={el.id} onClick={() => getTestById(el.id)}>
+            {`${el.id} : ${el.passed}`}{" "}
+            <button
+              className="btn-1 btn-pass"
+              onClick={() => getTestById(el.id)}
+            >
+              Pass
+            </button>
+          </div>
+        ))}
     </>
   );
 };
