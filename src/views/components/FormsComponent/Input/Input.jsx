@@ -24,6 +24,7 @@ const Input = ({
       )}
 
       <input
+        value={input.value}
         className="form-input"
         {...input}
         placeholder={placeholder}

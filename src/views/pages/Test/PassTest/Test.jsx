@@ -13,8 +13,6 @@ const Test = ({ profile, history, location }) => {
     getAllTest();
   }, []);
 
-  console.log(location.pathname.split("/")[1]);
-
   const getAllTest = async () => {
     await Axios.get("http://localhost:3010/api/auth/allTest").then(res =>
       setAllTest(res.data)
@@ -29,8 +27,8 @@ const Test = ({ profile, history, location }) => {
       <div>User will pass the test here</div>
       {allTest.length &&
         allTest.map(el => (
-          <div key={el.id} onClick={() => getTestById(el.id)}>
-            {`${el.id} : ${el.passed}`}{" "}
+          <div key={el.id}>
+            {`Test #${el.id} : ${el.passed}`}{" "}
             <button
               className="btn-1 btn-pass"
               onClick={() => getTestById(el.id)}

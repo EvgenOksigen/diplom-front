@@ -3,8 +3,6 @@ import thunkMiddleware from "redux-thunk";
 import * as reducers from "./ducks";
 import { reducer as formReducer } from "redux-form";
 
-
-
 const composeEnhancer =
   process.env.NODE_ENV === "development"
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
