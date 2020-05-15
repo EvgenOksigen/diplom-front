@@ -7,8 +7,12 @@ const Input = ({
   label,
   required,
   placeholder,
-  notification
+  notification,
+  maxLength,
+  disabled
 }) => {
+  console.log(disabled);
+
   return (
     <>
       {label === "empty" ? (
@@ -24,12 +28,13 @@ const Input = ({
       )}
 
       <input
-        value={input.value}
         className="form-input"
         {...input}
         placeholder={placeholder}
         onChange={input.onChange}
         type={type}
+        maxLength={maxLength}
+        disabled
       />
     </>
   );

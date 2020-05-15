@@ -1,23 +1,8 @@
 import React from "react";
 import "../formComponents.scss";
 import Tooltip from "react-tooltip-lite";
-import { useEffect } from "react";
 
-const Checkbox = ({
-  input,
-  text,
-  name,
-  disabled,
-  withEmptyLabel,
-  onChange,
-  defaultValue,
-  withoutMargin
-}) => {
-  useEffect(() => {
-    if (defaultValue === true) {
-      input.onChange(true);
-    }
-  }, [defaultValue]);
+const Checkbox = ({ input, text, name, disabled, withEmptyLabel }) => {
   return (
     <>
       {withEmptyLabel && <label className="empty-label">&nbsp;</label>}

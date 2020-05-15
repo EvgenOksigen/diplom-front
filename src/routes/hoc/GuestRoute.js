@@ -7,7 +7,6 @@ const GuestRoute = ({ component: Component, user, ...rest }) => (
     {...rest}
     render={props => {
       if (!user) {
-        
         return <Component {...props} />;
       }
       return <Redirect to="/" />;
@@ -15,6 +14,6 @@ const GuestRoute = ({ component: Component, user, ...rest }) => (
   />
 );
 
-const mapStateToProps = ( {user} ) => ({user});
+const mapStateToProps = ({ user }) => ({ user });
 
 export default connect(mapStateToProps)(GuestRoute);

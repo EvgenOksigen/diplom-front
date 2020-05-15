@@ -1,76 +1,58 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import Auth from "../views/pages/Auth/Auth";
-import DefaultRoute from './default'
-import GuestRoute from './hoc/GuestRoute';
+import DefaultRoute from "./default";
+import GuestRoute from "./hoc/GuestRoute";
 
-import { me, setMe } from "../state/ducks/user/actions";
-import PrivateRoute from './hoc/PrivateRoute';
-import Home from '../views/pages/Home/Home';
-import MainContainer from '../views/layout/MainContainer/MainContainer'
+import { me } from "../state/ducks/user/actions";
+import PrivateRoute from "./hoc/PrivateRoute";
+import Home from "../views/pages/Home/Home";
+import MainContainer from "../views/layout/MainContainer/MainContainer";
 
-class App extends React.Component {
+const App = ({ me, user }) => {
+  useEffect(() => {
+    getMe();
+  }, []);
 
-  state = {
-    loading: true,
-    resources: []
-  };
+  const [loading, setLoading] = useState(true);
 
-  componentDidMount() {
-    this.getMe();
-  }
-
-  getMe = async () => {
-    const { me } = this.props;
-
+  const getMe = async () => {
     const token = localStorage.getItem("token");
 
     if (token) {
       await me().catch(() => {
         localStorage.removeItem("token");
       });
-     }
-     this.setState({ loading: false });
-
+    }
+    setLoading(false);
   };
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    const { user } = nextProps;
+  useEffect(() => {
     if (user && user.isLogged && !user.profile) {
-      this.setState({ loading: true });
+      setLoading(true);
 
-      this.getMe();
+      getMe();
     }
-  }
+  }, [user]);
 
-  render () { 
-    
-    return(
-      <MainContainer /* className={cm({ [s.visualImpairments]: isChangeTheme })} */>
+  return (
+    <MainContainer>
+      {!loading && (
+        <Switch>
+          <Route path="/" exact component={DefaultRoute} />
 
-        {!this.state.loading &&(
+          <GuestRoute path="/login" exact component={Auth} />
 
-          <Switch>
-              <Route path="/" exact component={DefaultRoute} />
-
-              <GuestRoute path="/login" exact component={Auth} />
-
-              <PrivateRoute path="/home/:user?/:action?" exact component={Home}/>
-
-            </Switch>
-          ) 
-        }
-
-
-      </MainContainer>
-
-     ) 
-  }
-}
+          <PrivateRoute path="/home/:user?/:action?" exact component={Home} />
+        </Switch>
+      )}
+    </MainContainer>
+  );
+};
 
 const mapStateToProps = ({ user }) => ({ user });
 
-const mapDispatchToProps = { me, setMe };
+const mapDispatchToProps = { me };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

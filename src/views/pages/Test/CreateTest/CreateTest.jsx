@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { useEffect } from "react";
 import { Field, FieldArray, Form, reduxForm, getFormValues } from "redux-form";
 import { connect } from "react-redux";
 import Input from "../../../components/FormsComponent/Input/Input";
@@ -9,11 +9,108 @@ import Tooltip from "react-tooltip-lite";
 import Axios from "axios";
 import Selecter from "../../../components/FormsComponent/Select/Select";
 
-const answerWithInput = ({ fields }) => {
-  if (fields.length === 0) {
-    fields.push({});
-  }
-  console.log("wI");
+const MatchingAnswers = ({ fields }) => {
+  useEffect(() => {
+    if (fields.length === 1) {
+      return;
+    }
+
+    if (fields.length === 0) {
+      fields.push({});
+    } else {
+      fields.splice(0, fields.length - 1);
+    }
+  }, []);
+
+  return fields.map((item, index) => (
+    <div key={item} className="question-list">
+      <div className="match-line">
+        <div className="question">
+          <Field
+            name={`${item}.1.text`}
+            component={TextArea}
+            label="Bопрос"
+            placeholder="Введте вопрос"
+          />
+        </div>
+        <div className="answer">
+          <Field
+            name={`${item}.1.answer`}
+            component={TextArea}
+            label="Ответ"
+            placeholder="Oтвет"
+          />
+        </div>
+      </div>
+      <div className="match-line">
+        <div className="question">
+          <Field
+            name={`${item}.2.text`}
+            component={TextArea}
+            label="Bопрос"
+            placeholder="Введте вопрос"
+          />
+        </div>
+        <div className="answer">
+          <Field
+            name={`${item}.2.answer`}
+            component={TextArea}
+            label="Ответ"
+            placeholder="Oтвет"
+          />
+        </div>
+      </div>
+      <div className="match-line">
+        <div className="question">
+          <Field
+            name={`${item}.3.text`}
+            component={TextArea}
+            label="Bопрос"
+            placeholder="Введте вопрос"
+          />
+        </div>
+        <div className="answer">
+          <Field
+            name={`${item}.3.answer`}
+            component={TextArea}
+            label="Ответ"
+            placeholder="Oтвет"
+          />
+        </div>
+      </div>
+      <div className="match-line">
+        <div className="question">
+          <Field
+            name={`${item}.4.text`}
+            component={TextArea}
+            label="Bопрос"
+            placeholder="Введте вопрос"
+          />
+        </div>
+        <div className="answer">
+          <Field
+            name={`${item}.4.answer`}
+            component={TextArea}
+            label="Ответ"
+            placeholder="Oтвет"
+          />
+        </div>
+      </div>
+    </div>
+  ));
+};
+const AnswerWithInput = ({ fields }) => {
+  useEffect(() => {
+    if (fields.length === 1) {
+      return;
+    }
+
+    if (fields.length === 0) {
+      fields.push({});
+    } else {
+      fields.splice(0, fields.length - 1);
+    }
+  }, []);
 
   return fields.map((item, index) => (
     <div key={index} className="answer">
@@ -28,12 +125,12 @@ const answerWithInput = ({ fields }) => {
   ));
 };
 
-const additionalAnswers = ({ fields }) => {
-  if (fields.length === 0) {
-    fields.push({});
-  }
-  console.log("AaA");
-
+const AdditionalAnswers = ({ fields }) => {
+  useEffect(() => {
+    if (fields.length === 0) {
+      fields.push({});
+    }
+  });
   return (
     <>
       {fields.map((item, index) => (
@@ -68,98 +165,133 @@ const additionalAnswers = ({ fields }) => {
   );
 };
 
-const additionalQuestion = ({ fields, formValues }) => {
-  if (fields.length === 0) {
-    fields.push({});
-  }
-  return fields.map((item, index) => (
-    <Fragment key={index}>
-      <div key={index} className="question-container">
-        <div className="question-header">
-          <Field
+const AdditionalQuestion = ({ fields, formValues }) => {
+  useEffect(() => {
+    if (fields.length === 0) {
+      fields.push({});
+    }
+  }, []);
+
+  return (
+    <>
+      {fields.map((item, index) => (
+        <div key={index} className="question-container">
+          <div className="question-header">
+            <div className="kind">
+              <div>
+                <Field
+                  key={index}
+                  name={`${item}.kind`}
+                  component={Selecter}
+                  label="Тип"
+                  options={[
+                    {
+                      text: "С один и более правильными ответами",
+                      value: "oneMoreAnswers"
+                    },
+                    {
+                      text: "С пользовательским полем ввода",
+                      value: "withInput"
+                    },
+                    {
+                      text: "Сопоставление ответов",
+                      value: "matchingAnswers"
+                    }
+                    //TODO: Create question with image
+                    // {
+                    //   text: "Teacher",
+                    //   value: "teacher"
+                    // }
+                  ]}
+                  defaultValue={"oneMoreAnswers"}
+                />
+              </div>
+
+              <div className="question-cost">
+                <Field
+                  key={index}
+                  name={`${item}.cost`}
+                  component={Input}
+                  label="Цена"
+                  placeholder="?"
+                  maxLength="2"
+                />
+                $
+              </div>
+            </div>
+
+            {formValues.question[index].kind !== "matchingAnswers" && (
+              <div className="question">
+                <Field
+                  key={index}
+                  name={`${item}.text`}
+                  component={TextArea}
+                  label="Bопрос"
+                  placeholder="Введте вопрос"
+                />
+              </div>
+            )}
+          </div>
+
+          <div
             key={index}
-            name={`${item}.kind`}
-            component={Selecter}
-            label="Какой вопрос"
-            options={[
-              {
-                text: "С один и более правильными ответами",
-                value: "oneMoreAnswers"
-              },
-              {
-                text: "С пользовательским полем ввода",
-                value: "withInput"
-              }
-              //TODO: Create question with image
-              // {
-              //   text: "Teacher",
-              //   value: "teacher"
-              // }
-            ]}
-            defaultValue={"withInput"}
-          />
-
-          <div className="question">
-            <Field
-              key={index}
-              name={`${item}.text`}
-              component={TextArea}
-              label="Bопрос"
-              placeholder="Введте вопрос"
-            />
+            className={
+              formValues.question[index].kind === "withInput"
+                ? "answer-input"
+                : formValues.question[index].kind === "oneMoreAnswers"
+                ? "answer-list"
+                : "answer-match"
+            }
+          >
+            {formValues.question[index].kind === "oneMoreAnswers" && (
+              <FieldArray
+                className="createTest-container"
+                name={`${item}.answers`}
+                component={AdditionalAnswers}
+                formValues={formValues}
+              />
+            )}
+            {formValues.question[index].kind === "withInput" && (
+              <FieldArray
+                className="createTest-container"
+                name={`${item}.answers`}
+                component={AnswerWithInput}
+                formValues={formValues}
+              />
+            )}
+            {formValues.question[index].kind === "matchingAnswers" && (
+              <FieldArray
+                className="createTest-container"
+                name={`${item}.answers`}
+                component={MatchingAnswers}
+                formValues={formValues}
+              />
+            )}
           </div>
 
-          <div className="question-cost">
-            <Field
-              key={index}
-              name={`${item}.cost`}
-              component={Input}
-              label="Цена вопроса"
-              placeholder="?"
-            />
-            $
-          </div>
-        </div>
-
-        <div key={index} className="answer-list">
-          {formValues.question[index].kind === "oneMoreAnswers" ? (
-            <FieldArray
-              className="createTest-container"
-              name={`${item}.answers`}
-              component={additionalAnswers}
-              formValues={formValues}
-            />
-          ) : (
-            <FieldArray
-              className="createTest-container"
-              name={`${item}.answers`}
-              component={answerWithInput}
-              formValues={formValues}
-            />
+          {fields.length !== 1 && (
+            <button type="button" onClick={() => fields.splice(index, 1)}>
+              <i className="fas fa-minus-circle"></i> Bопрос
+            </button>
           )}
         </div>
-
-        {fields.length !== 1 && (
-          <button type="button" onClick={() => fields.splice(index, 1)}>
-            <i className="fas fa-minus-circle"></i> Bопрос
-          </button>
-        )}
-      </div>
-      <button type="button" onClick={() => fields.push({})}>
+      ))}
+      <button className="add-btn" type="button" onClick={() => fields.push({})}>
         <i className="fas fa-plus"></i> Bопрос
       </button>
-    </Fragment>
-  ));
+    </>
+  );
 };
 
 let CreateTest = ({ handleSubmit, formValues }) => {
   const formSubmit = e => {
     e.preventDefault();
     handleSubmit(values => {
-      console.log(values);
-      Axios.post("http://localhost:3010/api/auth/create-test", {
-        test: values
-      });
+      console.log(values.question[0].answers);
+
+      // Axios.post("http://localhost:3010/api/test/create", {
+      //   test: values
+      // });
     })();
   };
 
@@ -169,7 +301,7 @@ let CreateTest = ({ handleSubmit, formValues }) => {
 
       <FieldArray
         name="question"
-        component={additionalQuestion}
+        component={AdditionalQuestion}
         formValues={formValues}
       />
 

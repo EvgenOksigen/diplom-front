@@ -6,18 +6,13 @@ import "./test.scss";
 import Axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
+import { getAllTest } from "../../../../state/ducks/test/actions";
 
-const Test = ({ profile, history, location }) => {
-  const [allTest, setAllTest] = useState([]);
+const Test = ({ profile, history, location, getAllTest, allTest }) => {
   useEffect(() => {
     getAllTest();
   }, []);
 
-  const getAllTest = async () => {
-    await Axios.get("http://localhost:3010/api/auth/allTest").then(res =>
-      setAllTest(res.data)
-    );
-  };
   const getTestById = async id => {
     history.push(`/${location.pathname.split("/")[1]}/test/${id}?`);
   };
@@ -41,8 +36,15 @@ const Test = ({ profile, history, location }) => {
   );
 };
 
-const mapStateToProps = ({ user }) => ({ profile: user.profile });
+const mapStateToProps = ({ user, test }) => ({
+  profile: user.profile,
+  allTest: test.allTests
+});
 
-const enhance = compose(connect(mapStateToProps), withRouter);
+const mapDispatchToProps = { getAllTest };
+const enhance = compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withRouter
+);
 
 export default enhance(Test);

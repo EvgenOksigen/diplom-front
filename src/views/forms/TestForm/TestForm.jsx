@@ -9,21 +9,14 @@ import { useEffect } from "react";
 import { withRouter } from "react-router";
 import Input from "../../components/FormsComponent/Input/Input";
 import "./TestForm.scss";
+import QuestionWithMatchingAnswers from "../../components/QuestionWithMatchingAnswers/QuestionWithMatchingAnswers";
+import { getTestById } from "../../../state/ducks/test/actions";
 
-const TestForm = ({ handleSubmit, match: { params } }) => {
-  const [test, setTest] = useState();
-
+const TestForm = ({ handleSubmit, match: { params }, getTestById, test }) => {
   useEffect(() => {
-    initTest();
-  }, []);
-
-  const initTest = async () => {
     const { id } = params;
-
-    await Axios.get(`http://localhost:3010/api/auth/test/${id}`).then(res =>
-      setTest(res.data)
-    );
-  };
+    getTestById(id);
+  }, []);
 
   const [rightAnswer, setRightAnswer] = useState([]);
 
@@ -38,7 +31,7 @@ const TestForm = ({ handleSubmit, match: { params } }) => {
         return;
       }
       res = await Axios.post(
-        "http://localhost:3010/api/auth/test-right",
+        "http://localhost:3010/api/test-right",
         values
       ).then(res => res.data);
       setRightAnswer(res);
@@ -47,41 +40,46 @@ const TestForm = ({ handleSubmit, match: { params } }) => {
   return (
     <div className="test-wrapp">
       <Form autoComplete="off" className="" onSubmit={formSubmit}>
-        {test &&
+        {test.test_json &&
           test.test_json.question.map((qw, qi) => {
-            return (
-              <div className="qwestion" key={qi}>
-                <span
-                  className={rightAnswer[qi] ? "right" : null}
-                >{`${qw.cost}$`}</span>
-                {qw.text}
-                <div
-                  className={
-                    qw.kind !== "withInput"
-                      ? "answer-list"
-                      : "answer-list-input"
-                  }
-                >
-                  {qw.answers.map((answer, ai) => {
-                    return (
-                      <Field
-                        name={`answer.${qi}`}
-                        key={ai}
-                        component={
-                          qw.kind !== "withInput" ? RadioButton : Input
-                        }
-                        options={[
-                          { value: answer.answer, text: answer.answer }
-                        ]}
-                        placeholder={
-                          qw.kind === "withInput" && "Ввести ответ тут"
-                        }
-                      />
-                    );
-                  })}
+            if (qw.kind !== "matchingAnswers") {
+              return (
+                <div className="qwestion" key={qi}>
+                  <span
+                    className={rightAnswer[qi] ? "right" : null}
+                  >{`${qw.cost}$`}</span>
+                  {qw.text}
+                  <div className={`answer-list-${qw.kind}`}>
+                    {qw.answers.map((answer, ai) => {
+                      return (
+                        <Field
+                          name={`answer.${qi}`}
+                          key={ai}
+                          component={
+                            qw.kind !== "withInput" ? RadioButton : Input
+                          }
+                          options={[
+                            { value: answer.answer, text: answer.answer }
+                          ]}
+                          placeholder={
+                            qw.kind === "withInput" && "Ввести ответ тут"
+                          }
+                        />
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            );
+              );
+            } else {
+              return (
+                <QuestionWithMatchingAnswers
+                  key={qi}
+                  question={qw}
+                  qi={qi}
+                  rightAnswer={rightAnswer}
+                />
+              );
+            }
           })}
         <button type="submit">Pass</button>
       </Form>
@@ -89,10 +87,10 @@ const TestForm = ({ handleSubmit, match: { params } }) => {
   );
 };
 
-const mapStateToProps = ({ user }) => ({ user });
-
+const mapStateToProps = ({ user, test }) => ({ user, test: test.passedTest });
+const mapDispatchToProps = { getTestById };
 const enhance = compose(
-  connect(mapStateToProps, null),
+  connect(mapStateToProps, mapDispatchToProps),
   reduxForm({ form: "test" }),
   withRouter
 );

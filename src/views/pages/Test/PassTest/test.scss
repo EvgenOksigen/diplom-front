@@ -41,5 +41,41 @@
                 }
             }
         }
+        &-match{
+            display: flex;
+            flex-direction: row;
+            align-items: baseline;
+            >span{
+                border-radius: 50%;
+                border: 1px solid;
+                padding: 2px 4px;
+                margin-right: 15px;
+                &.right{
+                    background-color: greenyellow;
+                }
+            }
+            .var-container {
+                display: flex;
+                justify-content: space-between;
+                width: 90%;
+                margin: auto;
+            }
+            .var-list{
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                .var{
+                    display: flex;
+                }
+                .var-item{
+                    border-radius: 20px;
+                    border: 1px solid;
+                    padding: 10px;
+                    width: 100%;
+                    max-width: 80%;
+                    margin: 10px auto;
+                }    
+            }
+        }
     }
 }
