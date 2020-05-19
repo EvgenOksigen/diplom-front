@@ -34,7 +34,7 @@ const Input = ({
         onChange={input.onChange}
         type={type}
         maxLength={maxLength}
-        disabled
+        disabled={disabled}
       />
     </>
   );
