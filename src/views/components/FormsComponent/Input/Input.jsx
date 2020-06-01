@@ -11,8 +11,6 @@ const Input = ({
   maxLength,
   disabled
 }) => {
-  console.log(disabled);
-
   return (
     <>
       {label === "empty" ? (

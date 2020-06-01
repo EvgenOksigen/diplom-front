@@ -49,7 +49,7 @@ const TestForm = ({ handleSubmit, match: { params }, getTestById, test }) => {
                     className={rightAnswer[qi] ? "right" : null}
                   >{`${qw.cost}$`}</span>
                   {qw.text}
-                  <div className={`answer-list-${qw.kind}`}>
+                  <div className={`answer-list answer-list-${qw.kind}`}>
                     {qw.answers.map((answer, ai) => {
                       return (
                         <Field

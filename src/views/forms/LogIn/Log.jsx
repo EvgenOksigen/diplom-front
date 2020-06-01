@@ -13,10 +13,10 @@ class LoginForm extends Component {
   uploadHandler = e => {
     console.log(e.target.files);
     let fileList = e.target.files;
-    const formData = new FormData()
+    const formData = new FormData();
 
     for (let i = 0; i < fileList.length; i++) {
-      formData.append(`files`, fileList[i])
+      formData.append(`files`, fileList[i]);
     }
     Axios.post(
       "http://localhost:4444/api/users/upload-csv",
@@ -25,7 +25,7 @@ class LoginForm extends Component {
     ).then(res => {
       console.log(res.data);
       return res.data;
-    });    
+    });
   };
 
   getAll = () => {
@@ -49,7 +49,7 @@ class LoginForm extends Component {
 
     handleSubmit(values => {
       console.log(values);
-      
+
       signIn(values).then(res => {
         // console.log({res.data}})
       });
@@ -60,7 +60,12 @@ class LoginForm extends Component {
     return (
       <>
         <div>
-          <input type="file" name="attachment" onChange={this.uploadHandler} multiple/>
+          <input
+            type="file"
+            name="attachment"
+            onChange={this.uploadHandler}
+            multiple
+          />
           <button type="button" onClick={this.getAll}>
             GetAll
           </button>
