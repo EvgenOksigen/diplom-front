@@ -8,9 +8,10 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { withRouter } from "react-router";
 import Input from "../../components/FormsComponent/Input/Input";
-import "./TestForm.scss";
 import QuestionWithMatchingAnswers from "../../components/QuestionWithMatchingAnswers/QuestionWithMatchingAnswers";
 import { getTestById } from "../../../state/ducks/test/actions";
+
+import "./TestForm.scss";
 
 const TestForm = ({ handleSubmit, match: { params }, getTestById, test }) => {
   useEffect(() => {
