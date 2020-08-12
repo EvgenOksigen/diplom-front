@@ -17,19 +17,17 @@ const App = ({ me, user }) => {
 
   const [loading, setLoading] = useState(true);
 
-  const getMe = async () => {
+  const getMe = () => {
     const token = localStorage.getItem("token");
 
     if (token) {
-      await me().catch(() => {
-        localStorage.removeItem("token");
-      });
+      me();
     }
     setLoading(false);
   };
 
   useEffect(() => {
-    if (user && user.isLogged && !user.profile) {
+    if (user && user.isLogged && !user.name) {
       setLoading(true);
 
       getMe();

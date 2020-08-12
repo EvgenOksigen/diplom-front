@@ -9,7 +9,7 @@ const Selecter = ({
   required,
   options = [],
   onChange,
-  defaultValue
+  defaultValue,
 }) => {
   useEffect(() => {
     if (defaultValue) {
@@ -19,15 +19,15 @@ const Selecter = ({
   return (
     <>
       {label === "empty" ? (
-        <label>&nbsp;</label>
+        <label></label>
       ) : (
-        <label className={required && "required"}>{label}: </label>
+        <label className={required && "required"}>{label + ":"} </label>
       )}
 
       <select
         disabled={disabled ? true : false}
         {...input}
-        onChange={e => {
+        onChange={(e) => {
           input.onChange(e);
           onChange && onChange(e);
         }}

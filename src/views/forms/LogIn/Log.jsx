@@ -10,17 +10,18 @@ import Axios from "axios";
 
 class LoginForm extends Component {
   //
-  formSubmit = e => {
+  formSubmit = (e) => {
     e.preventDefault();
 
     const { handleSubmit, signIn } = this.props;
 
-    handleSubmit(values => {
+    handleSubmit((values) => {
       console.log(values);
 
-      signIn(values).then(res => {
-        // console.log({res.data}})
-      });
+      signIn(values);
+      // .then(res => {
+      // console.log({res.data}})
+      // });
     })();
   };
 
@@ -62,16 +63,16 @@ class LoginForm extends Component {
               options={[
                 {
                   text: "Student",
-                  value: "student"
+                  value: "student",
                 },
                 {
                   text: "Admin",
-                  value: "admin"
+                  value: "admin",
                 },
                 {
                   text: "Teacher",
-                  value: "teacher"
-                }
+                  value: "teacher",
+                },
               ]}
               defaultValue={"student"}
             />
