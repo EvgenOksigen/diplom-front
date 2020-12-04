@@ -15,14 +15,14 @@ const UserLogo = ({ profile, user, signOut }) => {
         <i className="fas fa-sign-in-alt"></i> LogOut
       </button>
       <div className="user-info">
-        {user && `${user.email} `}
-        <div className="user-logo role">{`${profile.p_role}`}</div>
+        {user.email}
+        <div className="user-logo role">{profile && profile.p_role}</div>
       </div>
     </div>
   );
 };
 
-const mapStateToProps = ({ user }) => ({ user, profile: user.profile });
+const mapStateToProps = ({ user }) => ({ user, profile: user && user.profile });
 
 const mapDispatchToProps = { signOut };
 

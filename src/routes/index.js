@@ -1,76 +1,57 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import Auth from "../views/pages/Auth/Auth";
-import DefaultRoute from './default'
-import GuestRoute from './hoc/GuestRoute';
+import DefaultRoute from "./default";
+import GuestRoute from "./hoc/GuestRoute";
 
-import { me, setMe } from "../state/ducks/user/actions";
-import PrivateRoute from './hoc/PrivateRoute';
-import Home from '../views/pages/Home/Home';
-import MainContainer from '../views/layout/MainContainer/MainContainer'
+import { me } from "../state/ducks/user/actions";
+import PrivateRoute from "./hoc/PrivateRoute";
+import Home from "../views/pages/Home/Home";
+import MainContainer from "../views/layout/MainContainer/MainContainer";
 
-class App extends React.Component {
+const App = ({ me, user, profile }) => {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    getMe().then(() => setLoading(false));
+  }, []);
 
-  state = {
-    loading: true,
-    resources: []
-  };
-
-  componentDidMount() {
-    this.getMe();
-  }
-
-  getMe = async () => {
-    const { me } = this.props;
-
+  const getMe = async () => {
     const token = localStorage.getItem("token");
 
-     if (token) {
-      await me().catch(() => {
-        localStorage.removeItem("token");
-      });
-     }
-     this.setState({ loading: false });
-
+    if (token) {
+      await me()
+        .then(() => console.log("Get user -> 'succes'"))
+        .catch(() => localStorage.removeItem("token"));
+    }
+    setLoading(false);
   };
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    const { user } = nextProps;
-    if (user && user.isLogged && !user.profile) {
-      this.setState({ loading: true });
-
-      this.getMe();
+  useEffect(() => {
+    if (user && user.isLogged && !profile) {
+      getMe().then(() => {
+        setLoading(false);
+      });
     }
-  }
+  }, [user]);
 
-  render () { 
-    
-    return(
-      <MainContainer /* className={cm({ [s.visualImpairments]: isChangeTheme })} */>
+  return (
+    <MainContainer>
+      {!loading && (
+        <Switch>
+          <Route path="/" exact component={DefaultRoute} />
 
-        {!this.state.loading &&(
+          <GuestRoute path="/login" exact component={Auth} />
 
-          <Switch>
-              <Route path="/" exact component={DefaultRoute} />
+          <PrivateRoute path="/home/:user?/:action?" exact component={Home} />
+        </Switch>
+      )}
+    </MainContainer>
+  );
+};
 
-              <GuestRoute path="/login" exact component={Auth} />
+const mapStateToProps = ({ user }) => ({ user, profile: user && user.profile });
 
-              <PrivateRoute path="/home/:user?/:action?" exact component={Home}/>
-
-            </Switch>
-          ) 
-        }
-
-
-      </MainContainer>
-
-     ) 
-  }
-}
-
-const mapStateToProps = ({ user }) => ({ user });
-
-const mapDispatchToProps = { me, setMe };
+const mapDispatchToProps = { me };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

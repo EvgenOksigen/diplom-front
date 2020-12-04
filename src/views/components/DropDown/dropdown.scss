@@ -1,0 +1,13 @@
+.dropdown {
+  position: relative;
+  outline: none;
+  width: 100%;
+  max-width: 150px;
+  .wrapperChildren {
+    position: absolute;
+    z-index: 2;
+    width: inherit;
+    outline: none;
+    right: 65px;
+  }
+}

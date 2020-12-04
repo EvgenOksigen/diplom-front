@@ -10,11 +10,12 @@ import CreateTest from "../Test/CreateTest/CreateTest";
 import Footer from "../../layout/Footer/Footer";
 import Content from "../../layout/Content/Content";
 import AddCourse from "../AddCourse/AddCourse";
+import TestForm from "../../forms/TestForm/TestForm";
 
-const Home = ({ location }) => {
+const Home = ({ location, profile }) => {
   return (
     <>
-      <Header />
+      <Header profile={profile} />
       <Content>
         <Route path="/home" exact render={() => <BaseHome />} />
 
@@ -31,11 +32,17 @@ const Home = ({ location }) => {
         />
 
         <Route
+          path={`/${location.pathname.split("/")[1]}/test/:id`}
+          exact
+          render={() => <TestForm />}
+        />
+
+        <Route
           path={`/${location.pathname.split("/")[1]}/create-test`}
           exact
           render={() => <CreateTest />}
         />
-        
+
         <Route
           path={`/${location.pathname.split("/")[1]}/add-course`}
           exact

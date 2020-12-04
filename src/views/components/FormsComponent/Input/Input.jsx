@@ -7,7 +7,9 @@ const Input = ({
   label,
   required,
   placeholder,
-  notification
+  notification,
+  maxLength,
+  disabled
 }) => {
   return (
     <>
@@ -15,7 +17,8 @@ const Input = ({
         <label>&nbsp;</label>
       ) : (
         <label className={required && "required"}>
-          {label}:{" "}
+          {label}
+          {label && ": "}
           {notification && (
             <span className="notification">( {notification} )</span>
           )}
@@ -28,6 +31,8 @@ const Input = ({
         placeholder={placeholder}
         onChange={input.onChange}
         type={type}
+        maxLength={maxLength}
+        disabled={disabled}
       />
     </>
   );

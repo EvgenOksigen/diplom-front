@@ -1,63 +1,98 @@
-import React from 'react'
-import { reduxForm, Form, Field } from 'redux-form';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import RadioButton from '../../components/FormsComponent/Radio/RadioButton';
-import Axios from 'axios';
-import { useState } from 'react';
+import React from "react";
+import { reduxForm, Form, Field } from "redux-form";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import RadioButton from "../../components/FormsComponent/Radio/RadioButton";
+import Axios from "axios";
+import { useState } from "react";
+import { useEffect } from "react";
+import { withRouter } from "react-router";
+import Input from "../../components/FormsComponent/Input/Input";
+import QuestionWithMatchingAnswers from "../../components/QuestionWithMatchingAnswers/QuestionWithMatchingAnswers";
+import { getTestById } from "../../../state/ducks/test/actions";
 
-const TestForm = ({test, handleSubmit}) => {
-  const [rightAnswer, setRightAnswer] = useState([])
-  let res
-    const formSubmit = e =>{
-      e.preventDefault();
+import "./TestForm.scss";
 
-      handleSubmit(async values=>{
-        if(!values.answers){
-          window.alert('not one answers ...')
-          return
-        }
-        res = await Axios.post("http://localhost:4444/api/users/test-right", values).then(res => res.data)
-        setRightAnswer(res)
-      })()
-    }
-    return(
-      <div className="test-wrapp">
-        <div key="kek">{test.test_json.test.discipline._text} </div>
-        <div className="kek">{test.test_json.test.title._text} </div>
-            <Form 
-              autoComplete="off"
-              className=""
-              onSubmit={formSubmit}>
-                {test.test_json.test.item.map((qw,qi)=>{
-                return (
-                  <div className="qwestion" key={qi}> <span className={rightAnswer[qi]?'right':null}>{`${qw._attributes.cost}$`}</span>{qw.question._text} 
-                    <div className="answer-list">
-                    {qw.answer.map((answer,ai)=>{
-                      return(
-                          <Field 
-                          name={`answers.${qi}`}
+const TestForm = ({ handleSubmit, match: { params }, getTestById, test }) => {
+  useEffect(() => {
+    const { id } = params;
+    getTestById(id);
+  }, []);
+
+  const [rightAnswer, setRightAnswer] = useState([]);
+
+  let res;
+
+  const formSubmit = e => {
+    e.preventDefault();
+
+    handleSubmit(async values => {
+      if (!values.answer) {
+        window.alert("not one answers ...");
+        return;
+      }
+      res = await Axios.post(
+        "http://localhost:3010/api/test-right",
+        values
+      ).then(res => res.data);
+      setRightAnswer(res);
+    })();
+  };
+  return (
+    <div className="test-wrapp">
+      <Form autoComplete="off" className="" onSubmit={formSubmit}>
+        {test.test_json &&
+          test.test_json.question.map((qw, qi) => {
+            if (qw.kind !== "matchingAnswers") {
+              return (
+                <div className="qwestion" key={qi}>
+                  <span
+                    className={rightAnswer[qi] ? "right" : null}
+                  >{`${qw.cost}$`}</span>
+                  {qw.text}
+                  <div className={`answer-list answer-list-${qw.kind}`}>
+                    {qw.answers.map((answer, ai) => {
+                      return (
+                        <Field
+                          name={`answer.${qi}`}
                           key={ai}
-                          component={RadioButton}
+                          component={
+                            qw.kind !== "withInput" ? RadioButton : Input
+                          }
                           options={[
-                            { value: answer._text, text: answer._text},
+                            { value: answer.answer, text: answer.answer }
                           ]}
-                          />
-                        )
+                          placeholder={
+                            qw.kind === "withInput" && "Ввести ответ тут"
+                          }
+                        />
+                      );
                     })}
-                    </div>
-                  </div>)})}
-              <button type='submit'>Pass</button>
-            </Form>
-        </div>
-    )
-}
+                  </div>
+                </div>
+              );
+            } else {
+              return (
+                <QuestionWithMatchingAnswers
+                  key={qi}
+                  question={qw}
+                  qi={qi}
+                  rightAnswer={rightAnswer}
+                />
+              );
+            }
+          })}
+        <button type="submit">Pass</button>
+      </Form>
+    </div>
+  );
+};
 
-
-const mapStateToProps = ({ user }) => ({ user });
-
+const mapStateToProps = ({ user, test }) => ({ user, test: test.passedTest });
+const mapDispatchToProps = { getTestById };
 const enhance = compose(
-  connect(mapStateToProps, null),
-  reduxForm({ form: "test" })
+  connect(mapStateToProps, mapDispatchToProps),
+  reduxForm({ form: "test" }),
+  withRouter
 );
-  export default enhance(TestForm);
+export default enhance(TestForm);

@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import api from "../../../api";
 
 import "./AddUserForm.scss";
+
 let AddUserForm = ({ handleSubmit, showingForm }) => {
   const formSubmit = e => {
     e.preventDefault();
@@ -14,11 +15,13 @@ let AddUserForm = ({ handleSubmit, showingForm }) => {
         ...values,
         all_roles: values.all_roles.split(",")
       };
-      await api.users.signup(formData).then(res => {
-        alert(`User has been created : ${JSON.stringify(res, null, 4)}`); //TODO antd message
-        showingForm();
-        return res;
-      });
+      console.log(values.all_roles.split(","));
+
+      // await api.users.signup(formData).then(res => {
+      //   alert(`User has been created : ${JSON.stringify(res, null, 4)}`); //TODO antd message
+      //   showingForm();
+      //   return res;
+      // });
     })();
   };
   return (
@@ -81,7 +84,7 @@ let AddUserForm = ({ handleSubmit, showingForm }) => {
             className="add-user-form-field"
             label="Default role"
             name="default_role"
-            component={Input}
+            component={Input} // TODO remake to selecter
             type="text"
             placeholder="Default role"
           />
@@ -91,9 +94,19 @@ let AddUserForm = ({ handleSubmit, showingForm }) => {
             className="add-user-form-field"
             label="All roles"
             name="all_roles"
-            component={Input}
+            component={Input} // TODO remake to checkbox
             type="text"
             placeholder="All roles"
+          />
+        </div>
+        <div className="add-user-form-field">
+          <Field
+            className="add-user-form-field"
+            label="All roles"
+            name="password"
+            component={Input}
+            type="password"
+            placeholder="password"
           />
         </div>
 

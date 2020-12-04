@@ -1,10 +1,10 @@
-import axios from 'axios'
+import axios from "axios";
 
-import contacts from './contacts'
-import users from './users'
-import tasks from './tasks';
+import contacts from "./contacts";
+import users from "./users";
+import test from "./test";
 
-import store from '../state/store'
+import store from "../state/store";
 
 export const CanselToken = axios.CancelToken;
 
@@ -15,12 +15,12 @@ export const setHeader = () => {
 
   return {
     Accept: "application/json",
-    Authorization: token,
+    Authorization: token
   };
 };
 
 export default {
   contacts,
   users,
-  tasks
+  test
 };

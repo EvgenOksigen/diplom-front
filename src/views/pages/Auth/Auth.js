@@ -1,12 +1,12 @@
 import React from "react";
 
-import './Auth'
+import "./Auth";
 import LoginForm from "../../forms/LogIn/Log";
 
 const Auth = () => (
   <div className="background">
     <div className="wrap-login-form">
-      <LoginForm/>
+      <LoginForm />
     </div>
   </div>
 );
