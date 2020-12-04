@@ -10,27 +10,28 @@ import PrivateRoute from "./hoc/PrivateRoute";
 import Home from "../views/pages/Home/Home";
 import MainContainer from "../views/layout/MainContainer/MainContainer";
 
-const App = ({ me, user }) => {
+const App = ({ me, user, profile }) => {
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    getMe();
+    getMe().then(() => setLoading(false));
   }, []);
 
-  const [loading, setLoading] = useState(true);
-
-  const getMe = () => {
+  const getMe = async () => {
     const token = localStorage.getItem("token");
 
     if (token) {
-      me();
+      await me()
+        .then(() => console.log("Get user -> 'succes'"))
+        .catch(() => localStorage.removeItem("token"));
     }
     setLoading(false);
   };
 
   useEffect(() => {
-    if (user && user.isLogged && !user.name) {
-      setLoading(true);
-
-      getMe();
+    if (user && user.isLogged && !profile) {
+      getMe().then(() => {
+        setLoading(false);
+      });
     }
   }, [user]);
 
@@ -49,7 +50,7 @@ const App = ({ me, user }) => {
   );
 };
 
-const mapStateToProps = ({ user }) => ({ user });
+const mapStateToProps = ({ user }) => ({ user, profile: user && user.profile });
 
 const mapDispatchToProps = { me };
 

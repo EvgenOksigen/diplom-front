@@ -22,30 +22,29 @@ const Test = ({ history, location, formValues, getAllTest, allTest }) => {
     // getAllTest();
     (async () => {
       await Axios.get("https://assistant.khai.edu/api/assistant/exam").then(
-        (res) => {
+        res => {
           setTest(res.data);
         }
       );
     })();
   }, []);
 
-  const getTestById = async (id) => {
+  const getTestById = async id => {
     history.push(`/${location.pathname.split("/")[1]}/test/${id}?`);
   };
 
-  const formSubmit = (e) => {
+  const formSubmit = e => {
     e.preventDefault();
   };
 
   return (
     <div className="test-wrapp">
-      <div>User will pass the test here</div>
-
+      <div>{test.name}</div>
       <div>
         {console.log(test)}
         {test && (
           <>
-            <div>{test.name}</div>
+            {/* <div>{test.name}</div> */}
             <Form onSubmit={formSubmit}>
               {test.test &&
                 test.test.items.map((q_item, index) => {
@@ -92,18 +91,6 @@ const Test = ({ history, location, formValues, getAllTest, allTest }) => {
           </>
         )}
       </div>
-      {/* {allTest.length &&
-        allTest.map(el => (
-          <div key={el.id}>
-          {`Test #${el.id} : ${el.passed}`}{" "}
-          <button
-          className="btn-1 btn-pass"
-          onClick={() => getTestById(el.id)}
-          >
-          Pass
-          </button>
-          </div>
-        ))} */}
     </div>
   );
 };
@@ -111,7 +98,7 @@ const Test = ({ history, location, formValues, getAllTest, allTest }) => {
 const mapStateToProps = ({ user, test }) => ({
   profile: user.profile,
   allTest: test.allTests,
-  formValues: getFormValues("test"),
+  formValues: getFormValues("test")
 });
 
 const mapDispatchToProps = { getAllTest };

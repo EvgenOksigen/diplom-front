@@ -152,7 +152,7 @@ const AddCourse = () => {
             label="Загрузите лабораторные"
             name="labs"
             component={FUploaderMulter}
-            uploadReq={api.attachment.upload}
+            // uploadReq={api.attachment.upload}
             value={null}
             multiple
           />
@@ -160,7 +160,7 @@ const AddCourse = () => {
             label="Загрузите модули"
             name="modules"
             component={FUploaderMulter}
-            uploadReq={api.attachment.upload}
+            // uploadReq={api.attachment.upload}
             multiple
           />
         </div>

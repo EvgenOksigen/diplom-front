@@ -12,10 +12,10 @@ import Content from "../../layout/Content/Content";
 import AddCourse from "../AddCourse/AddCourse";
 import TestForm from "../../forms/TestForm/TestForm";
 
-const Home = ({ location }) => {
+const Home = ({ location, profile }) => {
   return (
     <>
-      <Header />
+      <Header profile={profile} />
       <Content>
         <Route path="/home" exact render={() => <BaseHome />} />
 

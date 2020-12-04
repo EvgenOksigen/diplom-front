@@ -6,7 +6,7 @@ const Compare = ({ input, options }) => {
   const [left, setLeft] = useState([]);
   const [right, setRight] = useState([]);
 
-  const moveUp = (index) => {
+  const moveUp = index => {
     if (index !== 0) {
       let tmp = right[index - 1];
       right[index - 1] = right[index];
@@ -15,12 +15,12 @@ const Compare = ({ input, options }) => {
     }
     console.log("up");
   };
-  const moveDown = (index) => {};
+  const moveDown = index => { };
 
   useEffect(() => {
     const l = [],
       r = [];
-    options.map((item) => {
+    options.map(item => {
       l.push(item.left);
       r.push(item.right);
     });

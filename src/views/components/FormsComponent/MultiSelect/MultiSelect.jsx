@@ -7,10 +7,10 @@ const MultiSelect = ({ options, input }) => {
     console.log("useeffect", multiSelect);
   }, [multiSelect.length]);
 
-  const onChange = (el) => {
+  const onChange = el => {
     if (multiSelect.includes(el)) {
-      setSelect([...multiSelect.filter((item) => item !== el)]);
-      input.onChange([...multiSelect.filter((item) => item !== el)]);
+      setSelect([...multiSelect.filter(item => item !== el)]);
+      input.onChange([...multiSelect.filter(item => item !== el)]);
     } else {
       setSelect([...multiSelect, el]);
       input.onChange([...multiSelect, el]);
@@ -23,9 +23,8 @@ const MultiSelect = ({ options, input }) => {
         {options.map((el, index) => (
           <div
             key={index}
-            className={`single test-form-item ${
-              multiSelect.includes(el) ? "active" : ""
-            }`}
+            className={`single test-form-item ${multiSelect.includes(el) ? "active" : ""
+              }`}
             onClick={() => onChange(el)}
           >
             {el.answer}
