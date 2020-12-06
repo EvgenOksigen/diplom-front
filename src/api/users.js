@@ -18,12 +18,12 @@ export default {
     return axios(config).then(res => res && res.data);
   },
 
-  signup: values => {
+  signup: data => {
     let config = {
       method: "POST",
       baseURL: `${USER_API}/signup`,
       headers: setHeader(),
-      values
+      data
     };
     return axios(config).then(res => res && res.data);
   }

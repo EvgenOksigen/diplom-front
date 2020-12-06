@@ -287,11 +287,11 @@ let CreateTest = ({ handleSubmit, formValues }) => {
   const formSubmit = e => {
     e.preventDefault();
     handleSubmit(values => {
-      console.log(values.question[0].answers);
+      console.log(values.question);
 
-      // Axios.post("http://localhost:3010/api/test/create", {
-      //   test: values
-      // });
+      Axios.post("http://localhost:3010/api/test/create", {
+        test: values
+      });
     })();
   };
 

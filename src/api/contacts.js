@@ -1,46 +1,46 @@
 const contacts = [
   {
     id: 1,
-    name:'Adam',
+    name: "Adam",
     phoneNumber: 380501111111,
-    edit:false
+    edit: false
   },
   {
     id: 2,
-    name:'Luise',
+    name: "Luise",
     phoneNumber: 38050999999,
-    edit:false
+    edit: false
   },
   {
     id: 3,
-    name:'Paul',
+    name: "Paul",
     phoneNumber: 38044999999,
-    edit:false
+    edit: false
   },
   {
     id: 4,
-    name:'Roza',
+    name: "Roza",
     phoneNumber: 38044999999,
-    edit:false
+    edit: false
   },
   {
-    id:43,
-    name: 'Helena',
+    id: 43,
+    name: "Helena",
     phoneNumber: 38044999999,
-    edit:false
+    edit: false
   },
   {
     id: 5,
-    name:'Willy',
+    name: "Willy",
     phoneNumber: 380681196024,
-    edit:false
+    edit: false
   },
   {
     id: 6,
-    name:'Helga',
+    name: "Helga",
     phoneNumber: 380501084193,
-    edit:false
+    edit: false
   }
-]
+];
 
 export default contacts;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import { connect } from "react-redux";
@@ -7,8 +7,14 @@ import "./Journal.scss";
 import { useState } from "react";
 import AddUserForm from "../../forms/AddUserForm/AddUserForm";
 
-const Journal = ({ location }) => {
+import { getAll } from "../../../state/ducks/journal/actions";
+
+const Journal = ({ location, getAll }) => {
   const [showForm, setShowForm] = useState(false);
+  useEffect(() => {
+    getAll().then(res => console.log(res));
+  });
+
   const showingForm = () => {
     setShowForm(!showForm);
   };
@@ -26,6 +32,6 @@ const Journal = ({ location }) => {
 
 const mapStateToProps = ({ user }) => ({ user });
 
-const enhance = compose(connect(mapStateToProps), withRouter);
+const enhance = compose(connect(mapStateToProps, { getAll }), withRouter);
 
 export default enhance(Journal);

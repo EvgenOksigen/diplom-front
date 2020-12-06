@@ -3,10 +3,13 @@ import axios from "axios";
 import contacts from "./contacts";
 import users from "./users";
 import test from "./test";
+import journal from "./journal";
 
 import store from "../state/store";
 
 export const CanselToken = axios.CancelToken;
+
+export const USER_HOST = "http://localhost:3010";
 
 export const setHeader = () => {
   const state = store.getState();
@@ -22,5 +25,6 @@ export const setHeader = () => {
 export default {
   contacts,
   users,
-  test
+  test,
+  journal
 };

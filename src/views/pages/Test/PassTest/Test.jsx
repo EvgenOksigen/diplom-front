@@ -19,14 +19,14 @@ const Test = ({ history, location, formValues, getAllTest, allTest }) => {
   const [rightAnswer, setRightAnswer] = useState([]);
 
   useEffect(() => {
-    // getAllTest();
-    (async () => {
-      await Axios.get("https://assistant.khai.edu/api/assistant/exam").then(
-        res => {
-          setTest(res.data);
-        }
-      );
-    })();
+    getAllTest();
+    // (async () => {
+    //   await Axios.get("https://assistant.khai.edu/api/assistant/exam").then(
+    //     res => {
+    //       setTest(res.data);
+    //     }
+    //   );
+    // })();
   }, []);
 
   const getTestById = async id => {
@@ -39,59 +39,69 @@ const Test = ({ history, location, formValues, getAllTest, allTest }) => {
 
   return (
     <div className="test-wrapp">
-      <div>{test.name}</div>
-      <div>
-        {console.log(test)}
-        {test && (
-          <>
-            {/* <div>{test.name}</div> */}
-            <Form onSubmit={formSubmit}>
-              {test.test &&
-                test.test.items.map((q_item, index) => {
-                  return (
-                    <div key={index}>
-                      <div className="question">
-                        <span className={rightAnswer[index] ? "right" : null}>
-                          {q_item.cost}
-                        </span>
-                        {q_item.question}
-                        {q_item.type === "single" && (
-                          <Field
-                            name={`question-${index}`}
-                            component={SingleSelect}
-                            options={q_item.answers}
-                          />
-                        )}
-                        {q_item.type === "multi" && (
-                          <Field
-                            name={`question-${index}`}
-                            component={MultiSelect}
-                            options={q_item.answers}
-                          />
-                        )}
-                        {q_item.type === "certain" && (
-                          <Field
-                            name={`question-${index}`}
-                            component={Certain}
-                            options={q_item.answers}
-                          />
-                        )}
-                        {q_item.type === "compare" && (
-                          <Field
-                            name={`question-${index}`}
-                            component={Compare}
-                            options={q_item.answers}
-                          />
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
-            </Form>
-          </>
-        )}
-      </div>
+      {allTest.map((el, i) => (
+        <div
+          key={el.id}
+          className="test-item"
+          onClick={() => getTestById(el.id)}
+        >
+          {i} - Test {el.passed ? "Done" : "Unfinish"}
+        </div>
+      ))}
     </div>
+    //   <div className="test-wrapp">
+    //     <div>{test.name}</div>
+    //     <div>
+    //       {console.log(test)}
+    //       {test && (
+    //         <>
+    //           <Form onSubmit={formSubmit}>
+    //             {test.test &&
+    //               test.test.items.map((q_item, index) => {
+    //                 return (
+    //                   <div key={index}>
+    //                     <div className="question">
+    //                       <span className={rightAnswer[index] ? "right" : null}>
+    //                         {q_item.cost}
+    //                       </span>
+    //                       {q_item.question}
+    //                       {q_item.type === "single" && (
+    //                         <Field
+    //                           name={`question-${index}`}
+    //                           component={SingleSelect}
+    //                           options={q_item.answers}
+    //                         />
+    //                       )}
+    //                       {q_item.type === "multi" && (
+    //                         <Field
+    //                           name={`question-${index}`}
+    //                           component={MultiSelect}
+    //                           options={q_item.answers}
+    //                         />
+    //                       )}
+    //                       {q_item.type === "certain" && (
+    //                         <Field
+    //                           name={`question-${index}`}
+    //                           component={Certain}
+    //                           options={q_item.answers}
+    //                         />
+    //                       )}
+    //                       {q_item.type === "compare" && (
+    //                         <Field
+    //                           name={`question-${index}`}
+    //                           component={Compare}
+    //                           options={q_item.answers}
+    //                         />
+    //                       )}
+    //                     </div>
+    //                   </div>
+    //                 );
+    //               })}
+    //           </Form>
+    //         </>
+    //       )}
+    //     </div>
+    //   </div>
   );
 };
 

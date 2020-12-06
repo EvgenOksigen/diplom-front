@@ -17,11 +17,11 @@ let AddUserForm = ({ handleSubmit, showingForm }) => {
       };
       console.log(values.all_roles.split(","));
 
-      // await api.users.signup(formData).then(res => {
-      //   alert(`User has been created : ${JSON.stringify(res, null, 4)}`); //TODO antd message
-      //   showingForm();
-      //   return res;
-      // });
+      await api.users.signup(formData).then(res => {
+        alert(`User has been created : ${JSON.stringify(res, null, 4)}`); //TODO antd message
+        showingForm();
+        return res;
+      });
     })();
   };
   return (
@@ -102,7 +102,7 @@ let AddUserForm = ({ handleSubmit, showingForm }) => {
         <div className="add-user-form-field">
           <Field
             className="add-user-form-field"
-            label="All roles"
+            label="Password"
             name="password"
             component={Input}
             type="password"

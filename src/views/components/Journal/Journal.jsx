@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import api from "../../../api";
 
 const Journal = () => {
   return <div>Journal</div>;
