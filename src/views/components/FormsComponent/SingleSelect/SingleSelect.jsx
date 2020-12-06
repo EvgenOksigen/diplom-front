@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const SingleSelect = ({ options = [], input }) => {
   const [singleSelect, setSelect] = useState(null);
 
-  const onChange = (el) => {
+  const onChange = el => {
     input.onChange(el.answer);
     setSelect(el);
   };
@@ -18,7 +18,7 @@ const SingleSelect = ({ options = [], input }) => {
             }`}
             onClick={() => onChange(el)}
           >
-            {el.answer}
+            <div className="answer">{el.answer}</div>
           </div>
         ))}
       </div>
