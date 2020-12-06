@@ -51,9 +51,9 @@ const Test = ({ history, location, formValues, getAllTest, allTest }) => {
                   return (
                     <div key={index}>
                       <div className="question">
-                        <span
-                          className={rightAnswer[index] ? "right" : null}
-                        >{`${q_item.cost}$`}</span>
+                        <span className={rightAnswer[index] ? "right" : null}>
+                          {q_item.cost}
+                        </span>
                         {q_item.question}
                         {q_item.type === "single" && (
                           <Field

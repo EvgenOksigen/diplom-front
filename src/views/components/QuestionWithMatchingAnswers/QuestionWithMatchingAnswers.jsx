@@ -22,9 +22,7 @@ const QuestionWithMatchingAnswers = ({ question, qi, rightAnswer }) => {
 
   return (
     <div className="qwestion-match" key={qi}>
-      <span className={rightAnswer[qi] ? "right" : null}>
-        {`${question.cost}$`}
-      </span>
+      <span className={rightAnswer[qi] ? "right" : null}>{question.cost}</span>
       <div className="var-container">
         <div className="var-list">
           {q.map((q, i) => (

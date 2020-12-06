@@ -46,9 +46,9 @@ const TestForm = ({ handleSubmit, match: { params }, getTestById, test }) => {
             if (qw.kind !== "matchingAnswers") {
               return (
                 <div className="qwestion" key={qi}>
-                  <span
-                    className={rightAnswer[qi] ? "right" : null}
-                  >{`${qw.cost}$`}</span>
+                  <span className={rightAnswer[qi] ? "right" : null}>
+                    {qw.cost}
+                  </span>
                   {qw.text}
                   <div className={`answer-list answer-list-${qw.kind}`}>
                     {qw.answers.map((answer, ai) => {

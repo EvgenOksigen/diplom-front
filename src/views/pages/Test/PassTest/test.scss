@@ -25,16 +25,22 @@
       max-height: 60px;
         padding: 3px;
         line-height: 20px;
-      .active {
-        padding: 3px;
-        border: 1px solid;
-        // background: red;
+          .answer{
+            padding: 5px;
+            width: fit-content;
+          }
+          .active {
+            .answer{
+              border: 1px solid;
+          }
       }
       .btn {
         width: 25px;
       }
 
       .test-form-item {
+        width: 100%;
+        max-width: 350px;
         padding: 5px;
         margin: 1px;
         line-height: 20px;
