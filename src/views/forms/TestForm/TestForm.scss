@@ -1,3 +1,10 @@
+.qwestion{
+text-align: left;
+}.answer-list-oneMoreAnswers{
+    display: flex;
+    justify-content: space-between;
+}
+
 .answer-list{
     &-withInput{
         padding: 10px 0;

@@ -12,6 +12,11 @@ import QuestionWithMatchingAnswers from "../../components/QuestionWithMatchingAn
 import { getTestById } from "../../../state/ducks/test/actions";
 
 import "./TestForm.scss";
+import "../../pages/Test/PassTest/test.scss";
+import SingleSelect from "../../components/FormsComponent/SingleSelect/SingleSelect";
+import MultiSelect from "../../components/FormsComponent/MultiSelect/MultiSelect";
+import Certain from "../../components/FormsComponent/Certain/Certain";
+import Compare from "../../components/FormsComponent/Compare/Compare";
 
 const TestForm = ({ handleSubmit, match: { params }, getTestById, test }) => {
   useEffect(() => {
@@ -40,50 +45,60 @@ const TestForm = ({ handleSubmit, match: { params }, getTestById, test }) => {
   };
   return (
     <div className="test-wrapp">
-      <Form autoComplete="off" className="" onSubmit={formSubmit}>
-        {test.test_json &&
-          test.test_json.question.map((qw, qi) => {
-            if (qw.kind !== "matchingAnswers") {
-              return (
-                <div className="qwestion" key={qi}>
-                  <span className={rightAnswer[qi] ? "right" : null}>
-                    {qw.cost}
-                  </span>
-                  {qw.text}
-                  <div className={`answer-list answer-list-${qw.kind}`}>
-                    {qw.answers.map((answer, ai) => {
-                      return (
-                        <Field
-                          name={`answer.${qi}`}
-                          key={ai}
-                          component={
-                            qw.kind !== "withInput" ? RadioButton : Input
-                          }
-                          options={[
-                            { value: answer.answer, text: answer.answer }
-                          ]}
-                          placeholder={
-                            qw.kind === "withInput" && "Ввести ответ тут"
-                          }
-                        />
-                      );
-                    })}
-                  </div>
-                </div>
-              );
-            } else {
-              return (
-                <QuestionWithMatchingAnswers
-                  key={qi}
-                  question={qw}
-                  qi={qi}
-                  rightAnswer={rightAnswer}
-                />
-              );
-            }
-          })}
-        <button type="submit">Pass</button>
-      </Form>
+      <div>{test.name}</div>
+      <div>
+        {console.log(test)}
+        {test && (
+          <>
+            <Form onSubmit={formSubmit}>
+              {test.test_json &&
+                test.test_json.question.map((q_item, index) => {
+                  return (
+                    <div key={index}>
+                      <div className="question">
+                        <span className={rightAnswer[index] ? "right" : null}>
+                          {q_item.cost}
+                        </span>
+                        {q_item.text}{" "}
+                        {!q_item.text &&
+                          q_item.kind === "compare" &&
+                          "Сопоставьте "}
+                        {q_item.kind === "single" && (
+                          <Field
+                            name={`question-${index}`}
+                            component={SingleSelect}
+                            options={q_item.answers}
+                          />
+                        )}
+                        {q_item.kind === "multi" && (
+                          <Field
+                            name={`question-${index}`}
+                            component={MultiSelect}
+                            options={q_item.answers}
+                          />
+                        )}
+                        {q_item.kind === "certain" && (
+                          <Field
+                            name={`question-${index}`}
+                            component={Certain}
+                            options={q_item.answers}
+                          />
+                        )}
+                        {q_item.kind === "compare" && (
+                          <Field
+                            name={`question-${index}`}
+                            component={Compare}
+                            options={q_item.answers}
+                          />
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+            </Form>
+          </>
+        )}
+      </div>
     </div>
   );
 };

@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react";
 const MultiSelect = ({ options, input }) => {
   const [multiSelect, setSelect] = useState([]);
 
-  useEffect(() => {
-    console.log("useeffect", multiSelect);
-  }, [multiSelect.length]);
+  // useEffect(() => {
+  //   console.log("useeffect", multiSelect);
+  // }, [multiSelect.length]);
 
   const onChange = el => {
     if (multiSelect.includes(el)) {

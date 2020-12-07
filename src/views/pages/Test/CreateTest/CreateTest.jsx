@@ -1,5 +1,12 @@
 import React, { useEffect } from "react";
-import { Field, FieldArray, Form, reduxForm, getFormValues } from "redux-form";
+import {
+  Field,
+  FieldArray,
+  Form,
+  reduxForm,
+  getFormValues,
+  change
+} from "redux-form";
 import { connect } from "react-redux";
 import Input from "../../../components/FormsComponent/Input/Input";
 import "./CreateTest.scss";
@@ -99,7 +106,8 @@ const MatchingAnswers = ({ fields }) => {
     </div>
   ));
 };
-const AnswerWithInput = ({ fields }) => {
+
+const Answercertain = ({ fields }) => {
   useEffect(() => {
     if (fields.length === 1) {
       return;
@@ -125,7 +133,7 @@ const AnswerWithInput = ({ fields }) => {
   ));
 };
 
-const AdditionalAnswers = ({ fields }) => {
+const AdditionalAnswers = ({ fields, single }) => {
   useEffect(() => {
     if (fields.length === 0) {
       fields.push({});
@@ -186,16 +194,20 @@ const AdditionalQuestion = ({ fields, formValues }) => {
                   label="Тип"
                   options={[
                     {
+                      text: "С одним правильными ответом",
+                      value: "single"
+                    },
+                    {
                       text: "С один и более правильными ответами",
-                      value: "oneMoreAnswers"
+                      value: "multi"
                     },
                     {
                       text: "С пользовательским полем ввода",
-                      value: "withInput"
+                      value: "certain"
                     },
                     {
                       text: "Сопоставление ответов",
-                      value: "matchingAnswers"
+                      value: "compare"
                     }
                     //TODO: Create question with image
                     // {
@@ -203,7 +215,7 @@ const AdditionalQuestion = ({ fields, formValues }) => {
                     //   value: "teacher"
                     // }
                   ]}
-                  defaultValue={"oneMoreAnswers"}
+                  defaultValue={"multi"}
                 />
               </div>
 
@@ -220,7 +232,7 @@ const AdditionalQuestion = ({ fields, formValues }) => {
               </div>
             </div>
 
-            {formValues.question[index].kind !== "matchingAnswers" && (
+            {formValues.question[index].kind !== "compare" && (
               <div className="question">
                 <Field
                   key={index}
@@ -236,30 +248,35 @@ const AdditionalQuestion = ({ fields, formValues }) => {
           <div
             key={index}
             className={
-              formValues.question[index].kind === "withInput"
+              formValues.question[index].kind === "certain"
                 ? "answer-input"
-                : formValues.question[index].kind === "oneMoreAnswers"
+                : formValues.question[index].kind === "multi" ||
+                  formValues.question[index].kind === "single"
                 ? "answer-list"
                 : "answer-match"
             }
           >
-            {formValues.question[index].kind === "oneMoreAnswers" && (
+            {(formValues.question[index].kind === "multi" ||
+              formValues.question[index].kind === "single") && (
               <FieldArray
                 className="createTest-container"
                 name={`${item}.answers`}
                 component={AdditionalAnswers}
+                single={
+                  formValues.question[index].kind === "single" ? true : false
+                }
                 formValues={formValues}
               />
             )}
-            {formValues.question[index].kind === "withInput" && (
+            {formValues.question[index].kind === "certain" && (
               <FieldArray
                 className="createTest-container"
                 name={`${item}.answers`}
-                component={AnswerWithInput}
+                component={Answercertain}
                 formValues={formValues}
               />
             )}
-            {formValues.question[index].kind === "matchingAnswers" && (
+            {formValues.question[index].kind === "compare" && (
               <FieldArray
                 className="createTest-container"
                 name={`${item}.answers`}

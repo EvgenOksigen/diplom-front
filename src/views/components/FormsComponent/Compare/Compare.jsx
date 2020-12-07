@@ -6,6 +6,25 @@ const Compare = ({ input, options }) => {
   const [left, setLeft] = useState([]);
   const [right, setRight] = useState([]);
 
+  useEffect(() => {
+    const l = [],
+      r = [];
+    for (let key in options[0]) {
+      l.push(options[0][key].text);
+      r.push(options[0][key].answer);
+    }
+    setLeft(l);
+    setRight(shuffle(r));
+    // setRight(r);
+  }, []);
+
+  useEffect(() => {
+    console.log(left, right, options[0]);
+    setRight(shuffle(right));
+  }, [left, right]);
+
+  const shuffle = (array = []) => array.sort(() => Math.random() - 0.5);
+
   const moveUp = index => {
     if (index !== 0) {
       let tmp = right[index - 1];
@@ -15,21 +34,7 @@ const Compare = ({ input, options }) => {
     }
     console.log("up");
   };
-  const moveDown = index => { };
-
-  useEffect(() => {
-    const l = [],
-      r = [];
-    options.map(item => {
-      l.push(item.left);
-      r.push(item.right);
-    });
-    setLeft(l);
-    setRight(r);
-  }, []);
-  useEffect(() => {
-    console.log(left, right);
-  }, [left, right]);
+  const moveDown = index => {};
 
   /* 
     0: {left: "Jules Winnfield", right: "What does Marcellus Wallace look like?"}
